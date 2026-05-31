@@ -6,7 +6,7 @@
 <title>AkiPAN - Tienda Online | Sabores del Ecuador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 /* ============================================
    CSS CUSTOM PROPERTIES
@@ -48,57 +48,13 @@ body {
   background: var(--cream);
   color: var(--brown);
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
 }
 img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
-button { cursor: none; border: none; background: none; font-family: var(--font-body); }
+button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
 ul { list-style: none; }
 
-/* ============================================
-   CUSTOM CURSOR
-============================================ */
-#cursor-dot {
-  position: fixed;
-  width: 10px;
-  height: 10px;
-  background: var(--orange);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: var(--z-cursor);
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background 0.2s;
-  mix-blend-mode: multiply;
-}
-#cursor-ring {
-  position: fixed;
-  width: 36px;
-  height: 36px;
-  border: 2px solid var(--orange);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: var(--z-cursor);
-  transform: translate(-50%, -50%);
-  transition: width 0.25s, height 0.25s, border-color 0.25s, opacity 0.25s;
-  opacity: 0.7;
-}
-body.hovering #cursor-dot { width: 18px; height: 18px; background: var(--yellow); }
-body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--orange-light); opacity: 1; }
-
-.cursor-particle {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: calc(var(--z-cursor) - 1);
-  transform: translate(-50%, -50%);
-  animation: particleFade 0.7s forwards;
-}
-@keyframes particleFade {
-  0%   { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
-  100% { opacity: 0; transform: translate(-50%,-50%) scale(0); }
-}
 
 /* ============================================
    PRELOADER — CART ANIMATION
@@ -127,8 +83,8 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   animation: orbPulse var(--dur,6s) var(--delay,0s) infinite ease-in-out;
 }
 @keyframes orbPulse {
-  0%,100% { opacity: var(--op,0.15); transform: scale(1); }
-  50%      { opacity: calc(var(--op,0.15) * 1.6); transform: scale(1.15); }
+  0%,100% { opacity: var(--op,0.45); transform: scale(1); }
+  50%      { opacity: calc(var(--op,0.45) * 1.3); transform: scale(1.12); }
 }
 
 /* ── CART SCENE ── */
@@ -214,15 +170,17 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 }
 .pre-spark-dot {
   position: absolute;
-  width: 5px; height: 5px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: var(--orange);
   opacity: 0;
-  animation: sparkFly var(--dur,0.5s) var(--t,0s) both ease-out;
+  animation: sparkFly var(--dur,1.8s) var(--t,0s) both ease-out;
+  box-shadow: 0 0 6px currentColor;
 }
 @keyframes sparkFly {
-  0%   { opacity:1; transform: translate(0,0) scale(1); }
-  100% { opacity:0; transform: translate(var(--sx),var(--sy)) scale(0); }
+  0%   { opacity:0;   transform: translate(0,0) scale(0.5); }
+  20%  { opacity:1;   transform: translate(calc(var(--sx)*0.4), calc(var(--sy)*0.4)) scale(1.3); }
+  60%  { opacity:0.85; }
+  100% { opacity:0.6; transform: translate(var(--sx),var(--sy)) scale(0.9); }
 }
 
 /* Cart glow ring */
@@ -247,7 +205,7 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  animation: fadeUp 0.7s 2.5s both;
+  animation: fadeUp 0.5s 0.1s both;
 }
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(16px); }
@@ -345,19 +303,23 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
 }
 #navbar.scrolled {
-  background: rgba(255,248,240,0.88);
-  border-color: rgba(255,107,0,0.2);
-  box-shadow: 0 8px 40px rgba(255,107,0,0.15);
+  background: rgba(6, 2, 0, 0.96);
+  border-color: rgba(255,107,0,0.22);
+  border-bottom-color: rgba(255,107,0,0.35);
+  box-shadow:
+    0 1px 0 rgba(255,107,0,0.3),
+    0 12px 48px rgba(0,0,0,0.7),
+    0 4px 16px rgba(255,107,0,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(32px) saturate(2);
+  -webkit-backdrop-filter: blur(32px) saturate(2);
 }
-#navbar.scrolled .nav-links a { color: var(--brown); }
-#navbar.scrolled .nav-links a:hover { color: var(--orange); }
-#navbar.scrolled .nav-logo-text { color: var(--orange); }
 
 .nav-logo {
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: none;
+  cursor: pointer;
 }
 .nav-logo img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(255,107,0,0.4)); }
 .nav-logo-text {
@@ -383,7 +345,7 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   position: relative;
   padding: 4px 0;
   transition: color var(--transition);
-  cursor: none;
+  cursor: pointer;
 }
 .nav-links a::after {
   content: '';
@@ -413,7 +375,7 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   font-weight: 600;
   padding: 10px 20px;
   border-radius: 12px;
-  cursor: none;
+  cursor: pointer;
   transition: all var(--transition);
   box-shadow: 0 4px 16px rgba(255,107,0,0.35);
   border: none;
@@ -431,13 +393,11 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: none;
+  cursor: pointer;
   transition: all var(--transition);
 }
 #cart-btn:hover { background: rgba(255,107,0,0.25); border-color: rgba(255,107,0,0.4); transform: translateY(-2px); }
-#navbar.scrolled #cart-btn { background: rgba(255,107,0,0.1); border-color: rgba(255,107,0,0.25); }
 #cart-btn svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2; }
-#navbar.scrolled #cart-btn svg { stroke: var(--orange); }
 
 #cart-count {
   position: absolute;
@@ -466,91 +426,271 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 #hero {
   min-height: 100vh;
   position: relative;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
-  background: linear-gradient(160deg, #1a0800 0%, #3d1500 30%, #6b2500 60%, #FF6B00 100%);
+  background: #020100;
+  padding: 100px max(48px,5vw) 60px max(64px,7vw);
+  gap: 40px;
 }
-.hero-parallax-layer {
-  position: absolute;
-  inset: -20%;
-  pointer-events: none;
-}
-.hero-layer-1 {
-  background: radial-gradient(ellipse 80% 60% at 20% 50%, rgba(255,215,0,0.12) 0%, transparent 70%);
-}
-.hero-layer-2 {
-  background: radial-gradient(ellipse 60% 80% at 80% 30%, rgba(192,57,43,0.15) 0%, transparent 70%);
-}
-.hero-layer-3 {
-  background: radial-gradient(circle at 50% 100%, rgba(255,107,0,0.3) 0%, transparent 60%);
-}
-.hero-grid {
+
+/* ── HERO BACKGROUND — LEVEL GOD ── */
+
+/* Base */
+.hero-bg-base {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255,107,0,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,107,0,0.06) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background:
+    radial-gradient(ellipse 80% 80% at 68% 50%, #1e0900 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 20% 70%, #120500 0%, transparent 55%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, #0f0400 0%, transparent 50%),
+    #020100;
+  pointer-events: none;
 }
+
+/* Animated atmospheric blobs */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform;
+}
+/* Main warm light — right side */
+.hero-blob-1 {
+  width: min(700px, 60vw);
+  height: min(600px, 55vw);
+  top: -5%;
+  right: -5%;
+  background: radial-gradient(circle at 40% 40%, rgba(255,107,0,0.18) 0%, rgba(180,60,0,0.1) 40%, transparent 70%);
+  animation: blobDrift1 14s ease-in-out infinite alternate;
+}
+@keyframes blobDrift1 {
+  0%   { transform: translate(0,0) scale(1);    opacity: 0.85; }
+  100% { transform: translate(-40px,50px) scale(1.12); opacity: 1; }
+}
+
+/* Accent — bottom left */
+.hero-blob-2 {
+  width: min(500px, 45vw);
+  height: min(500px, 45vw);
+  bottom: -10%;
+  left: -5%;
+  background: radial-gradient(circle, rgba(192,57,43,0.1) 0%, rgba(120,20,10,0.06) 50%, transparent 70%);
+  animation: blobDrift2 18s ease-in-out infinite alternate;
+}
+@keyframes blobDrift2 {
+  0%   { transform: translate(0,0) scale(1); }
+  100% { transform: translate(50px,-40px) scale(1.08); }
+}
+
+/* Fill — top center */
+.hero-blob-3 {
+  width: min(400px, 35vw);
+  height: min(300px, 28vw);
+  top: 5%;
+  left: 18%;
+  background: radial-gradient(circle, rgba(255,180,0,0.06) 0%, transparent 65%);
+  animation: blobDrift3 22s ease-in-out infinite alternate;
+}
+@keyframes blobDrift3 {
+  0%   { transform: translate(0,0); opacity: 0.6; }
+  100% { transform: translate(30px,30px); opacity: 1; }
+}
+
+/* Deep spotlight behind visual */
+.hero-bg-glow {
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(640px, 52vw);
+  height: min(640px, 52vw);
+  background: radial-gradient(circle at 50% 48%,
+    rgba(255,107,0,0.14) 0%,
+    rgba(255,80,0,0.07)  30%,
+    rgba(180,50,0,0.03)  55%,
+    transparent 72%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: glowPulseHero 6s ease-in-out infinite;
+}
+@keyframes glowPulseHero {
+  0%,100% { opacity: 0.8; transform: translateY(-50%) scale(1);    }
+  50%     { opacity: 1;   transform: translateY(-50%) scale(1.06); }
+}
+
+/* Diagonal light rays */
+.hero-ray {
+  position: absolute;
+  top: -20%;
+  width: 1px;
+  height: 150%;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,140,0,0.07) 30%,
+    rgba(255,180,0,0.04) 55%,
+    transparent 85%);
+  transform-origin: top center;
+  pointer-events: none;
+}
+.hero-ray-1 { right: 38%; transform: rotate(-20deg); }
+.hero-ray-2 { right: 44%; transform: rotate(-20deg); opacity: 0.6; }
+.hero-ray-3 { right: 32%; transform: rotate(-20deg); opacity: 0.4; }
+
+/* Film grain overlay */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px;
+}
+
+/* Vignette — darken edges */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 90% 90% at 50% 50%,
+    transparent 40%,
+    rgba(2,1,0,0.45) 80%,
+    rgba(1,0,0,0.75) 100%);
+  pointer-events: none;
+}
+
+/* Ultra-subtle grid */
+.hero-bg-line {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,107,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,107,0,0.025) 1px, transparent 1px);
+  background-size: 90px 90px;
+  pointer-events: none;
+}
+
+/* ── LEFT: TEXT CONTENT ── */
 .hero-content {
   position: relative;
   z-index: 2;
-  text-align: center;
-  padding: 0 24px;
-  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
 }
-.hero-badge {
+.hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50px;
-  padding: 8px 20px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 3px;
+  gap: 10px;
+  margin-bottom: 24px;
+  animation: heroFadeUp 0.7s 1.1s both;
+}
+.hero-eyebrow-line {
+  width: 32px;
+  height: 1.5px;
+  background: var(--orange);
+  border-radius: 1px;
+}
+.hero-eyebrow-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--yellow);
-  margin-bottom: 28px;
-  animation: fadeDown 0.8s 1.2s both;
+  color: var(--orange);
 }
 .hero-badge-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--yellow);
-  animation: blink 1.2s infinite;
+  background: var(--orange);
+  animation: blink 1.4s infinite;
+  flex-shrink: 0;
 }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+@keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(42px, 8vw, 88px);
-  line-height: 1.1;
-  color: var(--white);
-  text-shadow: 0 4px 30px rgba(0,0,0,0.4);
-  margin-bottom: 16px;
-  animation: fadeDown 0.8s 1.4s both;
+  font-size: clamp(44px, 5.5vw, 80px);
+  line-height: 1.05;
+  color: white;
+  margin-bottom: 6px;
+  animation: heroFadeUp 0.7s 1.25s both;
+  letter-spacing: -0.5px;
 }
-.hero-title span { color: var(--yellow); }
+.hero-title-accent {
+  display: block;
+  font-size: clamp(52px, 6.5vw, 96px);
+  background: linear-gradient(135deg, #FFD700 0%, #FF8C3A 60%, #FF6B00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.0;
+  margin-bottom: 28px;
+  animation: heroFadeUp 0.7s 1.35s both;
+}
+
+.hero-divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), transparent);
+  border-radius: 1px;
+  margin-bottom: 24px;
+  animation: heroFadeUp 0.6s 1.45s both;
+}
+
 .hero-subtitle {
-  font-size: clamp(16px, 2vw, 20px);
-  color: rgba(255,255,255,0.75);
-  line-height: 1.6;
-  margin-bottom: 40px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  animation: fadeDown 0.8s 1.6s both;
+  font-family: 'Lora', serif;
+  font-size: clamp(15px, 1.3vw, 17px);
+  font-style: italic;
+  color: rgba(255,255,255,0.58);
+  line-height: 1.85;
+  margin-bottom: 36px;
+  font-weight: 400;
+  max-width: 420px;
+  letter-spacing: 0.2px;
+  animation: heroFadeUp 0.7s 1.55s both;
 }
+
+/* Social proof row */
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 36px;
+  animation: heroFadeUp 0.7s 1.65s both;
+}
+.hero-proof-avatars {
+  display: flex;
+}
+.hero-proof-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid #060200;
+  background: linear-gradient(135deg, var(--orange-light), var(--orange-dark));
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: white;
+  font-weight: 700;
+  font-family: var(--font-body);
+}
+.hero-proof-avatar:first-child { margin-left: 0; }
+.hero-proof-divider { width: 1px; height: 28px; background: rgba(255,255,255,0.12); }
+.hero-proof-text { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.4; }
+.hero-proof-text strong { color: white; font-weight: 600; display: block; font-size: 14px; }
+.hero-proof-stars { color: var(--yellow); font-size: 12px; letter-spacing: 1px; }
+
 .hero-ctas {
   display: flex;
-  gap: 16px;
-  justify-content: center;
+  gap: 14px;
   flex-wrap: wrap;
-  animation: fadeDown 0.8s 1.8s both;
+  animation: heroFadeUp 0.7s 1.75s both;
 }
 .btn-primary {
   display: inline-flex;
@@ -558,92 +698,262 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   gap: 10px;
   background: var(--orange);
   color: white;
-  padding: 16px 36px;
-  border-radius: 50px;
+  padding: 15px 32px;
+  border-radius: 14px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   font-family: var(--font-body);
-  cursor: none;
+  cursor: pointer;
   transition: all var(--transition);
-  box-shadow: 0 6px 24px rgba(255,107,0,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+  box-shadow: 0 6px 24px rgba(255,107,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
   position: relative;
   overflow: hidden;
+  letter-spacing: 0.3px;
 }
 .btn-primary::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
   opacity: 0;
   transition: opacity var(--transition);
 }
-.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(255,107,0,0.55); }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(255,107,0,0.55); background: var(--orange-light); }
 .btn-primary:hover::before { opacity: 1; }
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  color: white;
-  padding: 16px 36px;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 15px;
+  background: transparent;
+  color: rgba(255,255,255,0.85);
+  padding: 15px 32px;
+  border-radius: 14px;
+  font-weight: 500;
+  font-size: 14px;
   font-family: var(--font-body);
-  cursor: none;
-  border: 1px solid rgba(255,255,255,0.25);
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.2);
   transition: all var(--transition);
+  letter-spacing: 0.3px;
 }
-.btn-secondary:hover { background: rgba(255,255,255,0.22); transform: translateY(-3px); }
+.btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.35); transform: translateY(-3px); color: white; }
 
-/* Floating food emojis — replaced with SVG shapes */
-.hero-float {
+/* ── RIGHT: VISUAL ── */
+.hero-visual {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: min(540px, 55vw);
+  animation: heroFadeUp 0.9s 1.3s both;
+}
+
+/* Decorative rings */
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,107,0,0.18);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  animation: ringRotate var(--dur,30s) var(--dir,1) linear infinite;
+}
+@keyframes ringRotate { to { transform: translate(-50%,-50%) rotate(calc(var(--dir,1) * 360deg)); } }
+.hero-ring-1 { width: 88%;  height: 88%;  border-color: rgba(255,107,0,0.15); --dur:35s; --dir:1; }
+.hero-ring-2 { width: 74%;  height: 74%;  border-color: rgba(255,215,0,0.12); --dur:25s; --dir:-1; border-style: dashed; }
+.hero-ring-3 { width: 60%;  height: 60%;  border-color: rgba(255,107,0,0.2);  --dur:20s; --dir:1; }
+
+/* Center logo circle */
+.hero-logo-circle {
+  position: relative;
+  width: min(220px, 28vw);
+  height: min(220px, 28vw);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255,140,60,0.2) 0%, rgba(255,107,0,0.08) 50%, rgba(10,4,0,0.6) 100%);
+  border: 1.5px solid rgba(255,107,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 1px rgba(255,107,0,0.1),
+    0 0 60px rgba(255,107,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+  z-index: 2;
+  animation: logoPulse 4s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0%,100% { box-shadow: 0 0 0 1px rgba(255,107,0,0.1), 0 0 60px rgba(255,107,0,0.15), inset 0 1px 0 rgba(255,255,255,0.12); }
+  50%     { box-shadow: 0 0 0 1px rgba(255,107,0,0.2), 0 0 90px rgba(255,107,0,0.25), inset 0 1px 0 rgba(255,255,255,0.18); }
+}
+.hero-logo-circle img {
+  width: 72%;
+  height: 72%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(255,107,0,0.5));
+}
+
+/* Orbiting product nodes */
+.hero-orbit-wrap {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  animation: orbitSpin var(--dur,12s) var(--delay,0s) linear infinite;
+}
+@keyframes orbitSpin { to { transform: rotate(360deg); } }
+
+.hero-orbit-node {
+  position: absolute;
+  transform: translate(calc(var(--r) - 32px), -32px);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(20,8,0,0.85);
+  border: 1.5px solid rgba(255,107,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 12px rgba(255,107,0,0.15);
+  animation: nodeCounter var(--dur,12s) var(--delay,0s) linear infinite;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.hero-orbit-node:hover { border-color: rgba(255,107,0,0.7); box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 24px rgba(255,107,0,0.35); }
+@keyframes nodeCounter { to { transform: translate(calc(var(--r) - 32px), -32px) rotate(-360deg); } }
+
+/* Node label tooltip */
+.hero-orbit-label {
+  position: absolute;
+  bottom: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+  font-family: var(--font-body);
+}
+
+/* Floating accent lines */
+.hero-accent-line {
   position: absolute;
   pointer-events: none;
-  animation: floatOrbit var(--dur, 6s) var(--delay, 0s) infinite ease-in-out;
-  opacity: 0.7;
+  animation: accentFloat var(--dur,6s) var(--delay,0s) ease-in-out infinite;
 }
-@keyframes floatOrbit {
-  0%, 100% { transform: translate(0, 0) rotate(0deg); }
-  25%       { transform: translate(8px, -15px) rotate(5deg); }
-  50%       { transform: translate(0, -25px) rotate(0deg); }
-  75%       { transform: translate(-8px, -12px) rotate(-5deg); }
+@keyframes accentFloat {
+  0%,100% { transform: translateY(0) rotate(var(--rot,0deg)); opacity: var(--op,0.4); }
+  50%     { transform: translateY(-12px) rotate(calc(var(--rot,0deg) + 5deg)); opacity: calc(var(--op,0.4) * 0.6); }
 }
 
 /* Hero scroll indicator */
 .hero-scroll {
   position: absolute;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 32px;
+  left: max(64px,7vw);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  color: rgba(255,255,255,0.5);
-  font-size: 11px;
+  gap: 12px;
+  color: rgba(255,255,255,0.3);
+  font-size: 10px;
   letter-spacing: 3px;
   text-transform: uppercase;
-  animation: fadeDown 1s 2.2s both;
+  animation: heroFadeUp 0.7s 2.2s both;
+  font-family: var(--font-body);
 }
 .hero-scroll-line {
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.5));
-  animation: scrollLine 2s infinite;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, var(--orange), transparent);
+  border-radius: 1px;
+  animation: scrollPulse 2s infinite;
 }
-@keyframes scrollLine {
-  0%   { transform: scaleY(0); transform-origin: top; }
-  50%  { transform: scaleY(1); transform-origin: top; }
-  51%  { transform: scaleY(1); transform-origin: bottom; }
-  100% { transform: scaleY(0); transform-origin: bottom; }
+@keyframes scrollPulse {
+  0%,100% { transform: scaleX(1); opacity: 0.5; }
+  50%     { transform: scaleX(1.3); opacity: 1; }
 }
 
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 @keyframes fadeDown {
   from { opacity: 0; transform: translateY(-20px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+/* ============================================
+   SECTION SEPARATOR
+============================================ */
+.sep-divider {
+  position: relative;
+  z-index: 2;
+  background: #080200;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 48px;
+  overflow: hidden;
+}
+.sep-divider::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, #080200 0%, #060200 100%);
+}
+.sep-line {
+  flex: 1;
+  height: 1px;
+  position: relative;
+  z-index: 1;
+}
+.sep-line-left  { background: linear-gradient(to right,  transparent 0%, rgba(255,215,0,0.5) 40%, rgba(255,107,0,0.9) 100%); }
+.sep-line-right { background: linear-gradient(to left,   transparent 0%, rgba(255,215,0,0.5) 40%, rgba(255,107,0,0.9) 100%); }
+/* Flag accent dots on lines */
+.sep-line-left::before, .sep-line-right::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+.sep-line-left::before  { right: 80px;  background: #FFD700; box-shadow: 0 0 8px #FFD700; }
+.sep-line-right::before { left: 80px;   background: #003893; box-shadow: 0 0 8px #003893; }
+.sep-line-left::after, .sep-line-right::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+}
+.sep-line-left::after  { right: 40px; background: #CF142B; box-shadow: 0 0 8px #CF142B; }
+.sep-line-right::after { left: 40px;  background: #FFD700; box-shadow: 0 0 8px #FFD700; }
+
+.sep-emblem {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  margin: 0 28px;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255,140,60,0.25), rgba(5,1,0,0.95));
+  border: 1px solid rgba(255,107,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 8px rgba(255,107,0,0.06),
+    0 0 0 16px rgba(255,107,0,0.03),
+    0 0 40px rgba(255,107,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+  animation: sepPulse 3s ease-in-out infinite;
+}
+@keyframes sepPulse {
+  0%,100% { box-shadow: 0 0 0 8px rgba(255,107,0,0.06), 0 0 0 16px rgba(255,107,0,0.03), 0 0 40px rgba(255,107,0,0.3), inset 0 1px 0 rgba(255,255,255,0.12); }
+  50%     { box-shadow: 0 0 0 10px rgba(255,107,0,0.1),  0 0 0 22px rgba(255,107,0,0.05), 0 0 60px rgba(255,107,0,0.45), inset 0 1px 0 rgba(255,255,255,0.18); }
+}
+.sep-emblem svg { width: 34px; height: 34px; }
 
 /* ============================================
    SECTION SHARED
@@ -696,112 +1006,163 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 #products {
   position: relative;
   z-index: 1;
-  padding: 100px 24px;
-  background: var(--cream);
+  padding: 100px 24px 120px;
+  background: #080200;
+  overflow: hidden;
 }
+#products::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,107,0,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+#products .section-title { color: white; }
+#products .section-desc  { color: rgba(255,255,255,0.45); }
+
+/* Filter bar */
+.products-filter {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 52px;
+}
+.filter-btn {
+  padding: 9px 22px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+}
+.filter-btn:hover { background: rgba(255,107,0,0.15); border-color: rgba(255,107,0,0.3); color: white; }
+.filter-btn.active { background: var(--orange); border-color: var(--orange); color: white; box-shadow: 0 4px 16px rgba(255,107,0,0.35); }
+
+/* Grid */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 28px;
-  max-width: 1280px;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 20px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
-/* 3D Tilt Product Card */
+/* Card */
 .product-card {
   position: relative;
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(16px) saturate(1.5);
-  -webkit-backdrop-filter: blur(16px) saturate(1.5);
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 24px;
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
   overflow: hidden;
-  cursor: none;
-  box-shadow: 0 4px 24px rgba(120,53,15,0.1), inset 0 1px 0 rgba(255,255,255,0.8);
-  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
   transform-style: preserve-3d;
   will-change: transform;
 }
 .product-card:hover {
-  box-shadow:
-    0 20px 60px rgba(255,107,0,0.25),
-    0 4px 20px rgba(120,53,15,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.9);
+  transform: translateY(-8px) scale(1.01);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,107,0,0.35);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,107,0,0.15), 0 0 50px rgba(255,107,0,0.1);
 }
-.product-card-inner { position: relative; padding: 0; }
+.product-card-inner { position: relative; }
 
-/* Product image area */
+/* Image area */
 .product-img-wrap {
   position: relative;
-  height: 200px;
-  background: linear-gradient(135deg, var(--cream-dark) 0%, rgba(255,215,0,0.15) 100%);
+  height: 190px;
+  background: var(--card-bg, radial-gradient(circle at 40% 60%, rgba(255,107,0,0.18) 0%, rgba(0,0,0,0.3) 70%));
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
-.product-img-wrap::before {
+.product-img-wrap::after {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 60%, rgba(255,107,0,0.12), transparent 70%);
+  bottom: 0; left: 0; right: 0;
+  height: 60px;
+  background: linear-gradient(to top, rgba(10,2,0,0.6), transparent);
 }
 .product-emoji {
-  font-size: 80px;
-  transform: translateZ(30px);
-  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
-  transition: transform 0.3s ease;
+  font-size: 82px;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,0.5));
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
   user-select: none;
+  position: relative;
+  z-index: 1;
 }
-.product-card:hover .product-emoji { transform: translateZ(30px) scale(1.1) rotate(-5deg); }
+.product-card:hover .product-emoji { transform: scale(1.15) rotate(-6deg) translateY(-4px); }
+
+/* Shine sweep */
+.product-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,0.07) 50%, transparent 65%);
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+.product-card:hover .product-shine { animation: shineSlide 0.7s ease forwards; }
+@keyframes shineSlide {
+  from { transform: translateX(-100%); opacity: 1; }
+  to   { transform: translateX(120%);  opacity: 1; }
+}
+
+/* Badge */
 .product-badge {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: var(--orange);
-  color: white;
-  font-size: 10px;
+  top: 12px; left: 12px;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.9);
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   padding: 4px 10px;
   border-radius: 20px;
   text-transform: uppercase;
+  z-index: 2;
 }
-.product-badge.popular { background: var(--red); }
-.product-badge.new { background: var(--green); }
+.product-badge.popular { background: rgba(192,57,43,0.7);  border-color: rgba(192,57,43,0.4); }
+.product-badge.new     { background: rgba(39,174,96,0.7);  border-color: rgba(39,174,96,0.4); }
 
-/* Glow overlay on hover */
-.product-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,107,0,0.18), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-.product-card:hover .product-glow { opacity: 1; }
-
-/* Product info */
-.product-info { padding: 20px 22px 22px; }
+/* Info */
+.product-info { padding: 18px 20px 20px; }
 .product-category {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--orange);
+  color: rgba(255,107,0,0.75);
   margin-bottom: 6px;
 }
 .product-name {
   font-family: var(--font-display);
-  font-size: 18px;
-  color: var(--brown);
+  font-size: 17px;
+  color: white;
   margin-bottom: 8px;
   line-height: 1.3;
 }
 .product-desc {
-  font-size: 13px;
-  color: rgba(120,53,15,0.65);
-  line-height: 1.6;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.product-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
   margin-bottom: 16px;
 }
 .product-footer {
@@ -810,46 +1171,46 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   justify-content: space-between;
 }
 .product-price {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--orange);
-  font-family: var(--font-display);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
-.product-price span { font-size: 13px; font-weight: 400; color: rgba(120,53,15,0.5); }
+.product-price-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+.product-price-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+  font-family: var(--font-display);
+  line-height: 1;
+}
+.product-price-value span { font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.35); margin-left: 3px; }
 .add-to-cart {
-  width: 42px;
-  height: 42px;
-  background: var(--orange);
-  border-radius: 50%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  cursor: none;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
-  box-shadow: 0 4px 14px rgba(255,107,0,0.35);
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(255,107,0,0.35);
+  letter-spacing: 0.3px;
 }
-.add-to-cart:hover { transform: scale(1.15) rotate(10deg); background: var(--orange-dark); box-shadow: 0 6px 20px rgba(255,107,0,0.5); }
-.add-to-cart svg { width: 18px; height: 18px; stroke: white; fill: none; stroke-width: 2.5; }
+.add-to-cart:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,0,0.5); }
+.add-to-cart svg { width: 14px; height: 14px; stroke: white; fill: none; stroke-width: 2.5; flex-shrink: 0; }
 .add-to-cart.added { background: var(--green); animation: addedPop 0.4s ease; }
-@keyframes addedPop { 0%,100%{transform:scale(1.15)} 50%{transform:scale(0.9)} }
-
-/* Shine effect */
-.product-shine {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.4) 50%, transparent 70%);
-  opacity: 0;
-  transform: translateX(-100%);
-  pointer-events: none;
-  transition: none;
-}
-.product-card:hover .product-shine {
-  animation: shineSlide 0.6s ease forwards;
-}
-@keyframes shineSlide {
-  from { transform: translateX(-100%); opacity: 1; }
-  to   { transform: translateX(100%); opacity: 1; }
-}
+@keyframes addedPop { 0%,100%{transform:scale(1)} 50%{transform:scale(0.92)} }
 
 /* ============================================
    ABOUT SECTION
@@ -857,16 +1218,17 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 #about {
   position: relative;
   z-index: 1;
-  padding: 100px 24px;
-  background: linear-gradient(160deg, #3d1500 0%, #6b2500 50%, #FF6B00 100%);
+  padding: 70px 24px 100px;
+  background: #060200;
   overflow: hidden;
 }
 .about-bg-pattern {
   position: absolute;
   inset: 0;
-  background-image:
-    radial-gradient(circle 2px at 20px 20px, rgba(255,255,255,0.08) 0%, transparent 0%);
-  background-size: 40px 40px;
+  background:
+    radial-gradient(ellipse 70% 80% at 80% 50%, rgba(255,107,0,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 10% 30%, rgba(255,215,0,0.04) 0%, transparent 60%);
+  pointer-events: none;
 }
 .about-inner {
   position: relative;
@@ -875,101 +1237,177 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  gap: 80px;
   align-items: center;
 }
+
+/* ── LEFT ── */
 .about-content { color: white; }
 .about-label {
-  display: inline-block;
-  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: var(--yellow);
-  margin-bottom: 16px;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+.about-label::before {
+  content: '';
+  width: 28px; height: 1.5px;
+  background: var(--orange);
+  border-radius: 1px;
 }
 .about-title {
   font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 42px);
-  line-height: 1.2;
-  margin-bottom: 20px;
+  font-size: clamp(30px, 3.5vw, 46px);
+  line-height: 1.15;
+  margin-bottom: 24px;
   color: white;
 }
 .about-title span { color: var(--yellow); }
 .about-text {
-  font-size: 16px;
-  line-height: 1.8;
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 32px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 16px;
 }
+.about-divider {
+  width: 40px; height: 1px;
+  background: rgba(255,107,0,0.3);
+  margin: 28px 0;
+}
+
+/* Stats row */
 .about-stats {
-  display: flex;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 36px;
 }
+.about-stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 18px 16px;
+  text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+.about-stat-card:hover { background: rgba(255,107,0,0.08); border-color: rgba(255,107,0,0.25); }
 .about-stat-num {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: 30px;
   color: var(--yellow);
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
-.about-stat-label { font-size: 13px; color: rgba(255,255,255,0.6); }
+.about-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; }
 
+/* CTA */
+.about-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+  padding: 13px 28px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+}
+.about-cta:hover { background: var(--orange); border-color: var(--orange); color: white; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,0,0.35); }
+.about-cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* ── RIGHT ── */
 .about-visual {
   position: relative;
-}
-.about-card-stack {
-  position: relative;
-  height: 380px;
-}
-.about-card {
-  position: absolute;
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 24px;
-  padding: 28px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.about-card-main {
-  inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  gap: 16px;
+  height: 420px;
 }
-.about-card-back-1 {
-  top: -12px;
-  left: -12px;
-  right: 12px;
-  bottom: 12px;
-  background: rgba(255,107,0,0.2);
-  z-index: 0;
+
+/* Central logo circle */
+.about-logo-wrap {
+  position: relative;
+  z-index: 2;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255,140,60,0.18), rgba(0,0,0,0.5));
+  border: 1px solid rgba(255,107,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 80px rgba(255,107,0,0.12), inset 0 1px 0 rgba(255,255,255,0.1);
+  animation: logoPulse 4s ease-in-out infinite;
 }
-.about-card-back-2 {
-  top: -6px;
-  left: -6px;
-  right: 6px;
-  bottom: 6px;
-  background: rgba(255,215,0,0.15);
-  z-index: 1;
-}
-.about-card-main { z-index: 2; }
 .about-logo-big {
-  width: 120px;
-  height: auto;
-  filter: drop-shadow(0 0 30px rgba(255,107,0,0.5));
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(255,107,0,0.4));
   animation: chefBob 3s infinite ease-in-out;
 }
-.about-card-title {
-  font-family: var(--font-display);
-  font-size: 20px;
-  color: white;
-  text-align: center;
+
+/* Decorative rings */
+.about-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,107,0,0.1);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  pointer-events: none;
 }
-.about-card-sub { font-size: 13px; color: rgba(255,255,255,0.6); text-align: center; }
+.about-ring-1 { width: 280px; height: 280px; border-color: rgba(255,107,0,0.12); }
+.about-ring-2 { width: 360px; height: 360px; border-color: rgba(255,107,0,0.07); border-style: dashed; }
+
+/* Feature badges */
+.about-feature {
+  position: absolute;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+  animation: featureFloat var(--dur,5s) var(--delay,0s) ease-in-out infinite;
+  min-width: 150px;
+}
+@keyframes featureFloat {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.about-feature-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--ic, rgba(255,107,0,0.2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.about-feature-text strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1px;
+}
+.about-feature-text span { font-size: 10px; color: rgba(255,255,255,0.4); }
+
+.about-feature-1 { top: 4%;    left: 2%;   --dur:6s;   --delay:0s; }
+.about-feature-2 { top: 4%;    right: 2%;  --dur:5s;   --delay:1s; }
+.about-feature-3 { bottom: 4%; left: 2%;   --dur:7s;   --delay:0.5s; }
+.about-feature-4 { bottom: 4%; right: 2%;  --dur:5.5s; --delay:1.5s; }
+
 .about-stars { display: flex; gap: 4px; justify-content: center; }
 .about-stars svg { width: 16px; height: 16px; fill: var(--yellow); stroke: none; }
 
@@ -989,133 +1427,237 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 #cart-overlay.open { opacity: 1; pointer-events: all; }
 #cart-sidebar {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: min(420px, 100vw);
-  background: var(--cream);
+  top: 0; right: 0; bottom: 0;
+  width: min(400px, 100vw);
+  background: #0a0200;
   z-index: var(--z-cart);
   transform: translateX(100%);
   transition: transform var(--transition-slow);
   display: flex;
   flex-direction: column;
-  box-shadow: -20px 0 60px rgba(0,0,0,0.2);
+  box-shadow: -1px 0 0 rgba(255,107,0,0.1), -24px 0 80px rgba(0,0,0,0.6);
+  border-left: 1px solid rgba(255,107,0,0.1);
 }
 #cart-sidebar.open { transform: translateX(0); }
 
+/* Scrollbar */
+#cart-sidebar ::-webkit-scrollbar { width: 4px; }
+#cart-sidebar ::-webkit-scrollbar-track { background: transparent; }
+#cart-sidebar ::-webkit-scrollbar-thumb { background: rgba(255,107,0,0.3); border-radius: 2px; }
+
+/* Header */
 .cart-head {
-  padding: 24px 24px 16px;
-  border-bottom: 1px solid rgba(120,53,15,0.1);
+  padding: 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cart-head-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
+.cart-head-left { display: flex; align-items: center; gap: 10px; }
+.cart-head-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(255,107,0,0.12);
+  border: 1px solid rgba(255,107,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+}
+.cart-head-icon svg { width: 16px; height: 16px; stroke: var(--orange); fill: none; stroke-width: 2; }
 .cart-head h2 {
   font-family: var(--font-display);
-  font-size: 20px;
-  color: var(--brown);
+  font-size: 17px;
+  color: white;
+  letter-spacing: 0.5px;
+}
+.cart-head-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-family: var(--font-body);
 }
 #close-cart {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(120,53,15,0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: none;
-  transition: background var(--transition);
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
 }
-#close-cart:hover { background: rgba(255,107,0,0.15); }
-#close-cart svg { width: 16px; height: 16px; stroke: var(--brown); fill: none; stroke-width: 2.5; }
+#close-cart:hover { background: rgba(255,107,0,0.15); border-color: rgba(255,107,0,0.3); }
+#close-cart svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.6); fill: none; stroke-width: 2.5; }
 
+/* Items list */
 .cart-items {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .cart-item {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 14px;
-  background: white;
+  gap: 12px;
+  padding: 13px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 16px;
-  box-shadow: 0 2px 12px rgba(120,53,15,0.08);
   animation: slideIn 0.3s ease;
+  transition: border-color 0.2s, background 0.2s;
 }
-@keyframes slideIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
-.cart-item-emoji { font-size: 36px; }
-.cart-item-info { flex: 1; }
-.cart-item-name { font-weight: 600; font-size: 14px; color: var(--brown); margin-bottom: 2px; }
+.cart-item:hover { background: rgba(255,107,0,0.06); border-color: rgba(255,107,0,0.2); }
+@keyframes slideIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
+
+.cart-item-emoji-wrap {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name { font-weight: 600; font-size: 13px; color: white; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cart-item-price { font-size: 13px; color: var(--orange); font-weight: 700; }
+
 .cart-item-qty {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
 }
 .qty-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255,107,0,0.1);
-  color: var(--orange);
+  width: 30px; height: 30px;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
   font-weight: 700;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: none;
-  transition: background var(--transition);
+  font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+  border: none;
 }
-.qty-btn:hover { background: var(--orange); color: white; }
-.qty-num { font-weight: 700; font-size: 14px; color: var(--brown); min-width: 20px; text-align: center; }
+.qty-btn:hover { background: rgba(255,107,0,0.2); color: var(--orange); }
+.qty-num {
+  font-weight: 700;
+  font-size: 13px;
+  color: white;
+  min-width: 22px;
+  text-align: center;
+  border-left: 1px solid rgba(255,255,255,0.06);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  height: 30px;
+  line-height: 30px;
+}
 
+/* Empty state */
 .cart-empty {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  color: rgba(120,53,15,0.4);
-  font-size: 14px;
+  gap: 14px;
+  padding: 40px 20px;
 }
-.cart-empty svg { width: 48px; height: 48px; stroke: rgba(120,53,15,0.3); fill: none; stroke-width: 1.5; }
+.cart-empty-icon {
+  width: 72px; height: 72px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; justify-content: center;
+}
+.cart-empty-icon svg { width: 30px; height: 30px; stroke: rgba(255,255,255,0.2); fill: none; stroke-width: 1.5; }
+.cart-empty-title { font-size: 15px; font-weight: 600; color: rgba(255,255,255,0.4); }
+.cart-empty-desc { font-size: 12px; color: rgba(255,255,255,0.2); text-align: center; max-width: 200px; line-height: 1.6; }
+.cart-empty-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.2);
+  color: var(--orange);
+  padding: 9px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+.cart-empty-cta:hover { background: rgba(255,107,0,0.2); transform: translateY(-2px); }
 
+/* Footer */
 .cart-foot {
-  padding: 20px 24px;
-  border-top: 1px solid rgba(120,53,15,0.1);
+  padding: 16px 20px 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.2);
 }
+.cart-summary { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+.cart-summary-label { color: rgba(255,255,255,0.4); }
+.cart-summary-value { color: rgba(255,255,255,0.7); font-weight: 500; }
+.cart-summary-value.free { color: #4ade80; font-weight: 600; }
+.cart-summary-divider { height: 1px; background: rgba(255,255,255,0.06); margin: 4px 0; }
 .cart-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 }
-.cart-total-label { font-weight: 600; color: var(--brown); }
-.cart-total-price { font-family: var(--font-display); font-size: 24px; color: var(--orange); }
+.cart-total-label { font-size: 15px; font-weight: 700; color: white; }
+.cart-total-price { font-family: var(--font-display); font-size: 26px; color: var(--orange); }
 .cart-checkout {
   width: 100%;
-  padding: 16px;
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  padding: 15px;
+  background: var(--orange);
   color: white;
-  border-radius: 16px;
+  border-radius: 14px;
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   font-family: var(--font-body);
-  cursor: none;
+  cursor: pointer;
   transition: all var(--transition);
-  box-shadow: 0 6px 20px rgba(255,107,0,0.35);
+  box-shadow: 0 6px 24px rgba(255,107,0,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 9px;
+  border: none;
+  letter-spacing: 0.3px;
 }
-.cart-checkout:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,107,0,0.45); }
+.cart-checkout:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,107,0,0.5); }
+.cart-checkout svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2.5; }
+.cart-secure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+}
+.cart-secure svg { width: 11px; height: 11px; stroke: rgba(255,255,255,0.25); fill: none; stroke-width: 2; }
 
 /* ============================================
    TOAST
@@ -1157,61 +1699,644 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 /* ============================================
    FOOTER
 ============================================ */
+
+/* Pre-footer CTA */
+.footer-cta {
+  position: relative;
+  z-index: 1;
+  background: #080200;
+  border-top: 1px solid rgba(255,107,0,0.12);
+  padding: 72px 24px;
+  overflow: hidden;
+}
+.footer-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 120% at 85% 50%, rgba(255,107,0,0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 80% at 15% 50%, rgba(255,215,0,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+/* Decorative dots grid */
+.footer-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,107,0,0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.footer-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 48px;
+}
+/* Left: text */
+.footer-cta-text {}
+.footer-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,107,0,0.12);
+  border: 1px solid rgba(255,107,0,0.25);
+  border-radius: 50px;
+  padding: 5px 14px 5px 8px;
+  margin-bottom: 18px;
+}
+.footer-cta-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: blink 1.4s infinite;
+}
+.footer-cta-badge-text {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+.footer-cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.2vw, 42px);
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.footer-cta-title span {
+  background: linear-gradient(135deg, #FFD700, #FF8C3A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.footer-cta-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+/* Center: feature chips */
+.footer-cta-chips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-cta-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+.footer-cta-chip-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.footer-cta-chip-label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.7); }
+
+/* Right: actions */
+/* Glass action panels */
+.footer-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 260px;
+}
+.cta-glass-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  border-radius: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s ease, border-color 0.35s;
+}
+.cta-glass-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, rgba(255,255,255,0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cta-glass-panel:hover { transform: translateY(-6px) scale(1.02); }
+.cta-glass-panel:hover::before { opacity: 1; }
+
+/* Orange panel */
+.cta-panel-orange {
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.22);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+}
+.cta-panel-orange:hover {
+  box-shadow: 0 20px 48px rgba(255,107,0,0.25), 0 4px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12);
+  border-color: rgba(255,107,0,0.5);
+}
+
+/* Green panel */
+.cta-panel-green {
+  background: rgba(37,211,102,0.07);
+  border: 1px solid rgba(37,211,102,0.18);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+}
+.cta-panel-green:hover {
+  box-shadow: 0 20px 48px rgba(37,211,102,0.15), 0 4px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  border-color: rgba(37,211,102,0.4);
+}
+
+/* Icon circle */
+.cta-panel-icon {
+  width: 52px; height: 52px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 24px;
+  position: relative;
+}
+.cta-panel-orange .cta-panel-icon {
+  background: rgba(255,107,0,0.18);
+  border: 1px solid rgba(255,107,0,0.3);
+  box-shadow: 0 0 20px rgba(255,107,0,0.2);
+}
+.cta-panel-green .cta-panel-icon {
+  background: rgba(37,211,102,0.15);
+  border: 1px solid rgba(37,211,102,0.25);
+  box-shadow: 0 0 20px rgba(37,211,102,0.15);
+}
+
+/* Text */
+.cta-panel-body { flex: 1; }
+.cta-panel-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 3px;
+  font-family: var(--font-body);
+}
+.cta-panel-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.4;
+}
+.cta-panel-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: rgba(37,211,102,0.8);
+  margin-top: 4px;
+}
+.cta-panel-status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 0 6px #25d366;
+  animation: blink 1.6s infinite;
+}
+
+/* Arrow */
+.cta-panel-arrow {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+.cta-panel-orange .cta-panel-arrow { background: rgba(255,107,0,0.15); border-color: rgba(255,107,0,0.25); }
+.cta-panel-green  .cta-panel-arrow { background: rgba(37,211,102,0.12); border-color: rgba(37,211,102,0.2); }
+.cta-glass-panel:hover .cta-panel-arrow { transform: translateX(3px); }
+.cta-panel-arrow svg { width: 13px; height: 13px; stroke: rgba(255,255,255,0.6); fill: none; stroke-width: 2.5; }
+@media(max-width:900px) {
+  .footer-cta-inner { grid-template-columns: 1fr; }
+  .footer-cta-actions { align-items: stretch; }
+  .footer-cta-chips { flex-direction: row; flex-wrap: wrap; }
+}
+
+/* Main footer */
 #footer {
   position: relative;
   z-index: 1;
-  background: linear-gradient(180deg, #1a0800, #0d0400);
-  padding: 64px 24px 32px;
+  background: #060200;
+  padding: 64px 24px 0;
   color: rgba(255,255,255,0.7);
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
-.footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-}
+.footer-inner { max-width: 1100px; margin: 0 auto; }
+
 .footer-top {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 1.8fr 1fr 1fr 1.2fr;
   gap: 48px;
   padding-bottom: 48px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 0;
 }
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+.footer-brand { display: flex; flex-direction: column; gap: 16px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; }
-.footer-logo img { width: 48px; height: 48px; object-fit: contain; }
-.footer-logo-name { font-family: var(--font-display); font-size: 20px; color: var(--orange); }
-.footer-brand-text { font-size: 14px; line-height: 1.7; max-width: 280px; }
-.footer-socials { display: flex; gap: 12px; margin-top: 8px; }
+.footer-logo img { width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(255,107,0,0.3)); }
+.footer-logo-name { font-family: var(--font-display); font-size: 18px; color: white; }
+.footer-brand-text { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.4); max-width: 260px; }
+.footer-socials { display: flex; gap: 10px; }
 .footer-social {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: none;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
   transition: all var(--transition);
 }
-.footer-social:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-3px); }
-.footer-social svg { width: 16px; height: 16px; fill: rgba(255,255,255,0.7); }
-.footer-col h4 { font-family: var(--font-display); font-size: 14px; color: white; margin-bottom: 20px; letter-spacing: 1px; }
+.footer-social:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(255,107,0,0.35); }
+.footer-social svg { width: 15px; height: 15px; fill: rgba(255,255,255,0.6); transition: fill var(--transition); }
+.footer-social:hover svg { fill: white; }
+
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,107,0,0.2);
+  position: relative;
+}
+.footer-col h4::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0;
+  width: 24px; height: 1px;
+  background: var(--orange);
+}
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-.footer-col ul li a { font-size: 14px; color: rgba(255,255,255,0.55); cursor: none; transition: color var(--transition); }
-.footer-col ul li a:hover { color: var(--orange); }
-.footer-bottom {
+.footer-col ul li a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-col ul li a::before {
+  content: '';
+  width: 0;
+  height: 1px;
+  background: var(--orange);
+  transition: width 0.2s ease;
+  flex-shrink: 0;
+}
+.footer-col ul li a:hover { color: white; padding-left: 4px; }
+.footer-col ul li a:hover::before { width: 10px; }
+
+/* Contact col */
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.footer-contact-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(255,107,0,0.12);
+  border: 1px solid rgba(255,107,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.footer-contact-icon svg { width: 13px; height: 13px; stroke: var(--orange); fill: none; stroke-width: 2; }
+.footer-contact-label { font-size: 10px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; }
+.footer-contact-value { font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 1px; }
+
+/* Bottom bar */
+.footer-bottom-wrap {
+  padding: 20px 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13px;
-  color: rgba(255,255,255,0.3);
+  gap: 16px;
+  flex-wrap: wrap;
 }
-.footer-bottom a { color: var(--orange); cursor: none; }
+.footer-flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.footer-flag-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px currentColor;
+}
+.footer-bottom-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-bottom-right { display: flex; align-items: center; gap: 20px; }
+.footer-bottom-link { font-size: 12px; color: rgba(255,255,255,0.25); cursor: pointer; transition: color var(--transition); }
+.footer-bottom-link:hover { color: var(--orange); }
+.footer-bottom-brand { font-size: 12px; color: rgba(255,255,255,0.2); }
+.footer-bottom-brand a { color: var(--orange); cursor: pointer; font-weight: 600; }
+.footer-back-top {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+  flex-shrink: 0;
+}
+.footer-back-top:hover { background: var(--orange); border-color: var(--orange); transform: translateY(-3px); }
+.footer-back-top svg { width: 14px; height: 14px; stroke: var(--orange); fill: none; stroke-width: 2.5; transition: stroke var(--transition); }
+.footer-back-top:hover svg { stroke: white; }
+
+/* ============================================
+   REGISTER SECTION
+============================================ */
+#register {
+  position: relative;
+  z-index: 1;
+  padding: 110px 24px;
+  background: #060200;
+  overflow: hidden;
+}
+#register::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 70% at 75% 50%, rgba(255,107,0,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 30%, rgba(255,215,0,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+#register::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,107,0,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+.register-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+/* ── LEFT: Benefits ── */
+.register-benefits {}
+.register-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+.register-label::before {
+  content: '';
+  width: 28px; height: 1.5px;
+  background: var(--orange);
+  border-radius: 1px;
+}
+.register-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  color: white;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.register-title span {
+  background: linear-gradient(135deg, #FFD700, #FF8C3A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.register-subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 400px;
+}
+.register-perk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.register-perk {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.register-perk-icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: rgba(255,107,0,0.1);
+  border: 1px solid rgba(255,107,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+.register-perk-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 3px;
+}
+.register-perk-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.5;
+}
+.register-trust {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  width: fit-content;
+}
+.register-trust-icon { font-size: 20px; }
+.register-trust-text { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+.register-trust-text strong { color: rgba(255,255,255,0.7); font-weight: 600; display: block; }
+
+/* ── RIGHT: Form card ── */
+.register-card {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.register-card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: white;
+  margin-bottom: 6px;
+}
+.register-card-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 28px;
+}
+
+/* Form */
+.register-form { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.form-input-wrap { position: relative; }
+.form-input-icon {
+  position: absolute;
+  left: 14px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px;
+  stroke: rgba(255,255,255,0.25);
+  fill: none;
+  stroke-width: 2;
+  pointer-events: none;
+  transition: stroke 0.2s;
+}
+.form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 13px 14px 13px 42px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: white;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.form-input::placeholder { color: rgba(255,255,255,0.22); }
+.form-input:focus {
+  border-color: rgba(255,107,0,0.5);
+  background: rgba(255,107,0,0.05);
+  box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
+}
+.form-input:focus + .form-input-icon { stroke: var(--orange); }
+/* flip icon z-order so focus style works */
+.form-input-wrap .form-input { position: relative; z-index: 1; }
+.form-input-wrap .form-input:focus ~ .form-input-icon { stroke: var(--orange); }
+
+/* Password toggle */
+.form-input-wrap .form-pw-toggle {
+  position: absolute;
+  right: 14px; top: 50%; transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.form-pw-toggle svg { width: 16px; height: 16px; stroke: rgba(255,255,255,0.3); fill: none; stroke-width: 2; }
+
+/* Checkbox */
+.form-check { display: flex; align-items: flex-start; gap: 10px; }
+.form-check input[type="checkbox"] {
+  width: 18px; height: 18px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.05);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 1px;
+  accent-color: var(--orange);
+}
+.form-check-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.6;
+}
+.form-check-label a { color: var(--orange); cursor: pointer; }
+
+/* Submit */
+.form-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: 0 6px 24px rgba(255,107,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 4px;
+}
+.form-submit:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255,107,0,0.5); }
+.form-submit svg { width: 16px; height: 16px; stroke: white; fill: none; stroke-width: 2.5; }
+
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.2);
+  font-size: 12px;
+}
+.form-divider::before, .form-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.form-login-link {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+.form-login-link a { color: var(--orange); font-weight: 600; cursor: pointer; }
+
+/* Responsive */
+@media(max-width:900px) {
+  .register-inner { grid-template-columns: 1fr; gap: 48px; }
+  .form-row { grid-template-columns: 1fr; }
+}
 
 /* ============================================
    FLOATING BACKGROUND PARTICLES
@@ -1239,17 +2364,33 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 /* ============================================
    RESPONSIVE
 ============================================ */
+@media(max-width:1024px) {
+  #hero { grid-template-columns: 1fr; padding: 120px 32px 80px; justify-items: center; text-align: center; }
+  .hero-content { align-items: center; }
+  .hero-eyebrow { justify-content: center; }
+  .hero-subtitle { text-align: center; }
+  .hero-proof { justify-content: center; }
+  .hero-ctas { justify-content: center; }
+  .hero-divider { margin: 0 auto 24px; }
+  .hero-visual { width: min(360px, 80vw); height: min(360px, 80vw); }
+  .hero-scroll { left: 50%; transform: translateX(-50%); }
+  .nav-order-btn { display: none; }
+}
 @media(max-width:768px) {
   #navbar { top:8px; left:12px; right:12px; padding:10px 16px; border-radius:16px; }
   .nav-links { display:none; }
+  #hero { padding: 100px 20px 60px; }
+  .hero-title { font-size: clamp(36px, 9vw, 56px); }
+  .hero-title-accent { font-size: clamp(44px, 11vw, 68px); }
+  .hero-visual { width: 300px; height: 300px; }
   .about-inner { grid-template-columns:1fr; gap:40px; }
   .about-card-stack { height:280px; }
   .footer-top { grid-template-columns:1fr; gap:32px; }
   .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
-  .hero-ctas { flex-direction:column; align-items:center; }
 }
 @media(max-width:480px) {
   .products-grid { grid-template-columns:1fr; }
+  .hero-visual { width: 260px; height: 260px; }
 }
 
 /* Reduced motion */
@@ -1260,17 +2401,11 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 </head>
 <body>
 
-<!-- ============ CURSOR ============ -->
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
 
 <!-- ============ PRELOADER ============ -->
 <div id="preloader" role="status" aria-label="Cargando AkiPAN">
 
   <!-- Ambient orbs -->
-  <div class="pre-orb" style="width:300px;height:300px;background:#FF6B00;top:-80px;left:-80px;--op:0.12;--dur:5s;--delay:0s;" aria-hidden="true"></div>
-  <div class="pre-orb" style="width:250px;height:250px;background:#FFD700;bottom:-60px;right:-60px;--op:0.08;--dur:7s;--delay:1s;" aria-hidden="true"></div>
-  <div class="pre-orb" style="width:180px;height:180px;background:#C0392B;top:40%;left:10%;--op:0.07;--dur:6s;--delay:2s;" aria-hidden="true"></div>
 
   <!-- Cart scene -->
   <div class="pre-scene" aria-hidden="true">
@@ -1366,8 +2501,7 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 <!-- ============ NAVBAR ============ -->
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
   <a class="nav-logo" href="#hero" aria-label="Inicio AkiPAN">
-    <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN logo"
-         onerror="this.outerHTML='<svg width=44 height=44 viewBox=\'0 0 44 44\'><circle cx=22 cy=20 r=12 fill=\'#FF6B00\'/><rect x=10 y=8 width=24 height=8 rx=4 fill=\'#FF6B00\'/></svg>'">
+    <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN logo" onerror="this.style.display='none'">
     <span class="nav-logo-text">AkiPAN</span>
   </a>
   <ul class="nav-links" role="list">
@@ -1377,7 +2511,7 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
   </ul>
   <div class="nav-actions">
     <button id="cart-btn" aria-label="Abrir carrito de compras">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
       <span id="cart-count" aria-live="polite">0</span>
     </button>
   </div>
@@ -1385,64 +2519,117 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
 
 <!-- ============ HERO ============ -->
 <section id="hero" aria-label="Bienvenida">
-  <div class="hero-parallax-layer hero-layer-1" data-parallax="0.3"></div>
-  <div class="hero-parallax-layer hero-layer-2" data-parallax="0.5"></div>
-  <div class="hero-parallax-layer hero-layer-3" data-parallax="0.2"></div>
-  <div class="hero-grid" data-parallax="0.1"></div>
 
-  <!-- Floating food shapes -->
-  <div class="hero-float" style="top:15%;left:8%;--dur:7s;--delay:0s;" aria-hidden="true">
-    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-      <ellipse cx="30" cy="30" rx="28" ry="18" fill="rgba(255,215,0,0.3)" stroke="rgba(255,215,0,0.6)" stroke-width="1.5"/>
-      <ellipse cx="30" cy="28" rx="20" ry="12" fill="rgba(255,140,60,0.25)"/>
-    </svg>
-  </div>
-  <div class="hero-float" style="top:20%;right:10%;--dur:9s;--delay:1.5s;" aria-hidden="true">
-    <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
-      <circle cx="25" cy="25" r="22" fill="rgba(192,57,43,0.25)" stroke="rgba(192,57,43,0.5)" stroke-width="1.5"/>
-      <path d="M15 25 Q25 15 35 25 Q25 35 15 25Z" fill="rgba(255,107,0,0.3)"/>
-    </svg>
-  </div>
-  <div class="hero-float" style="bottom:25%;left:12%;--dur:8s;--delay:2s;" aria-hidden="true">
-    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-      <rect x="6" y="6" width="32" height="32" rx="8" fill="rgba(39,174,96,0.2)" stroke="rgba(39,174,96,0.45)" stroke-width="1.5" transform="rotate(20 22 22)"/>
-    </svg>
-  </div>
-  <div class="hero-float" style="bottom:30%;right:8%;--dur:6.5s;--delay:0.8s;" aria-hidden="true">
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-      <polygon points="20,4 37,30 3,30" fill="rgba(255,215,0,0.2)" stroke="rgba(255,215,0,0.5)" stroke-width="1.5"/>
-    </svg>
-  </div>
+  <!-- Backgrounds -->
+  <div class="hero-bg-base"  aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-3" aria-hidden="true"></div>
+  <div class="hero-bg-glow"  aria-hidden="true"></div>
+  <div class="hero-ray hero-ray-1"   aria-hidden="true"></div>
+  <div class="hero-ray hero-ray-2"   aria-hidden="true"></div>
+  <div class="hero-ray hero-ray-3"   aria-hidden="true"></div>
+  <div class="hero-bg-line"  aria-hidden="true"></div>
+  <div class="hero-grain"    aria-hidden="true"></div>
+  <div class="hero-vignette" aria-hidden="true"></div>
 
+  <!-- LEFT: Text -->
   <div class="hero-content">
-    <div class="hero-badge">
-      <div class="hero-badge-dot" aria-hidden="true"></div>
-      Panadería artesanal ecuatoriana
+    <div class="hero-eyebrow" aria-hidden="true">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Tu tienda de confianza</span>
+      <div class="hero-badge-dot"></div>
     </div>
-    <h1 class="hero-title">
-      Sabores del<br><span>Ecuador</span>
+
+    <h1>
+      <span class="hero-title">Sabores del</span>
+      <span class="hero-title-accent">Ecuador</span>
     </h1>
+
+    <div class="hero-divider" aria-hidden="true"></div>
+
     <p class="hero-subtitle">
-      Tradición, sabor y amor en cada bocado.<br>
-      Descubre nuestra selección artesanal hecha con los mejores ingredientes del campo ecuatoriano.
+      Tradición, sabor y amor en cada bocado. Descubre nuestra selección artesanal hecha con los mejores ingredientes del campo ecuatoriano.
     </p>
+
+    <div class="hero-proof" aria-label="Valoraciones de clientes">
+      <div class="hero-proof-avatars" aria-hidden="true">
+        <div class="hero-proof-avatar">A</div>
+        <div class="hero-proof-avatar">M</div>
+        <div class="hero-proof-avatar">J</div>
+      </div>
+      <div class="hero-proof-divider" aria-hidden="true"></div>
+      <div class="hero-proof-text">
+        <strong>+500 clientes felices</strong>
+        <span class="hero-proof-stars">★★★★★</span>
+      </div>
+    </div>
+
     <div class="hero-ctas">
       <a href="#products" class="btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
         Ver productos
       </a>
-      <a href="#about" class="btn-secondary">
-        Nuestra historia
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <a href="#register" class="btn-secondary">
+        Regístrate
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
       </a>
     </div>
   </div>
 
-  <div class="hero-scroll" aria-hidden="true">
-    <div class="hero-scroll-line"></div>
-    <span>Scroll</span>
+  <!-- RIGHT: Visual -->
+  <div class="hero-visual" aria-hidden="true">
+    <!-- Decorative rings -->
+    <div class="hero-ring hero-ring-1"></div>
+    <div class="hero-ring hero-ring-2"></div>
+    <div class="hero-ring hero-ring-3"></div>
+
+    <!-- Orbiting nodes -->
+    <div class="hero-orbit-wrap" style="--dur:16s;--delay:0s;">
+      <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:16s;--delay:0s;">
+        🥖<span class="hero-orbit-label">Pan de Yuca</span>
+      </div>
+    </div>
+    <div class="hero-orbit-wrap" style="--dur:20s;--delay:-5s;">
+      <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:20s;--delay:-5s;">
+        🎂<span class="hero-orbit-label">Tres Leches</span>
+      </div>
+    </div>
+    <div class="hero-orbit-wrap" style="--dur:18s;--delay:-9s;">
+      <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:18s;--delay:-9s;">
+        🥐<span class="hero-orbit-label">Croissant</span>
+      </div>
+    </div>
+    <div class="hero-orbit-wrap" style="--dur:22s;--delay:-14s;">
+      <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:22s;--delay:-14s;">
+        🍪<span class="hero-orbit-label">Galletas</span>
+      </div>
+    </div>
+
+    <!-- Center logo -->
+    <div class="hero-logo-circle">
+      <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN">
+    </div>
   </div>
+
 </section>
+
+<!-- ============ SEPARATOR ============ -->
+<div class="sep-divider" aria-hidden="true">
+  <div class="sep-line sep-line-left"></div>
+  <div class="sep-emblem">
+    <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="17" cy="17" r="16" fill="rgba(255,107,0,0.15)" stroke="rgba(255,107,0,0.4)" stroke-width="1"/>
+      <path d="M9 20 Q9 13 17 12 Q25 13 25 20 L24 23 Q17 25 10 23 Z" fill="rgba(255,140,50,0.7)" stroke="rgba(255,107,0,0.8)" stroke-width="0.8"/>
+      <path d="M13 16 Q17 14 21 16" stroke="rgba(255,215,0,0.8)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M12 19 Q17 17 22 19" stroke="rgba(255,215,0,0.6)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M13 11 Q14 9 13 7" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M17 10 Q18 8 17 6" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M21 11 Q22 9 21 7" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="sep-line sep-line-right"></div>
+</div>
 
 <!-- ============ PRODUCTS ============ -->
 <section id="products" aria-label="Nuestros productos">
@@ -1452,147 +2639,501 @@ body.hovering #cursor-ring { width: 56px; height: 56px; border-color: var(--oran
     <p class="section-desc">Preparados a diario con ingredientes frescos y recetas familiares transmitidas por generaciones.</p>
   </div>
 
+  <div class="products-filter reveal" role="group" aria-label="Filtrar productos">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="Panadería">Panadería</button>
+    <button class="filter-btn" data-filter="Pasteles">Pasteles</button>
+    <button class="filter-btn" data-filter="Bollería">Bollería</button>
+    <button class="filter-btn" data-filter="Dulces">Dulces</button>
+    <button class="filter-btn" data-filter="Galletas">Galletas</button>
+    <button class="filter-btn" data-filter="Frituras">Frituras</button>
+    <button class="filter-btn" data-filter="Especiales">Especiales</button>
+  </div>
+
   <div class="products-grid" id="products-grid" role="list">
     <!-- Cards injected by JS -->
   </div>
 </section>
 
+<!-- ============ SEPARATOR ============ -->
+<div class="sep-divider" aria-hidden="true">
+  <div class="sep-line sep-line-left"></div>
+  <div class="sep-emblem">
+    <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Wheat / bread icon -->
+      <circle cx="17" cy="17" r="16" fill="rgba(255,107,0,0.15)" stroke="rgba(255,107,0,0.4)" stroke-width="1"/>
+      <!-- Bread loaf shape -->
+      <path d="M9 20 Q9 13 17 12 Q25 13 25 20 L24 23 Q17 25 10 23 Z" fill="rgba(255,140,50,0.7)" stroke="rgba(255,107,0,0.8)" stroke-width="0.8"/>
+      <!-- Score lines on bread -->
+      <path d="M13 16 Q17 14 21 16" stroke="rgba(255,215,0,0.8)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M12 19 Q17 17 22 19" stroke="rgba(255,215,0,0.6)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <!-- Steam lines -->
+      <path d="M13 11 Q14 9 13 7" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M17 10 Q18 8 17 6" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M21 11 Q22 9 21 7" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="sep-line sep-line-right"></div>
+</div>
+
 <!-- ============ ABOUT ============ -->
 <section id="about" aria-label="Sobre AkiPAN">
   <div class="about-bg-pattern" aria-hidden="true"></div>
   <div class="about-inner">
+
+    <!-- LEFT -->
     <div class="about-content reveal-left">
       <span class="about-label">Nuestra historia</span>
       <h2 class="about-title">Desde el corazón<br>del <span>Ecuador</span></h2>
       <p class="about-text">
         AkiPAN nació del sueño de llevar los sabores auténticos de la panadería ecuatoriana a cada hogar. Cada receta es un homenaje a nuestra tierra, nuestras familias y la tradición que nos une.
       </p>
-      <p class="about-text" style="margin-bottom:40px;">
-        Utilizamos ingredientes locales de alta calidad, sin conservantes artificiales, porque creemos que el mejor sabor viene de la naturaleza y del amor puesto en cada preparación.
+      <p class="about-text">
+        Ingredientes locales de alta calidad, sin conservantes artificiales — porque el mejor sabor viene de la naturaleza y del amor en cada preparación.
       </p>
+
+      <div class="about-divider" aria-hidden="true"></div>
+
       <div class="about-stats">
-        <div>
+        <div class="about-stat-card">
           <div class="about-stat-num">+500</div>
           <div class="about-stat-label">Clientes felices</div>
         </div>
-        <div>
+        <div class="about-stat-card">
           <div class="about-stat-num">10+</div>
           <div class="about-stat-label">Productos únicos</div>
         </div>
-        <div>
+        <div class="about-stat-card">
           <div class="about-stat-num">5★</div>
           <div class="about-stat-label">Calificación</div>
         </div>
       </div>
+
+      <a href="#products" class="about-cta">
+        Ver productos
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
 
-    <div class="about-visual reveal-right">
-      <div class="about-card-stack">
-        <div class="about-card about-card-back-1" aria-hidden="true"></div>
-        <div class="about-card about-card-back-2" aria-hidden="true"></div>
-        <div class="about-card about-card-main">
-          <img class="about-logo-big"
-               src="LOGO AKIPAN TIENDA ONLINE.PNG"
-               alt="AkiPAN logo"
-               onerror="this.style.display='none'">
-          <div class="about-card-title">AkiPAN Tienda Online</div>
-          <div class="about-card-sub">Panadería &amp; Pastelería Artesanal</div>
-          <div class="about-stars" aria-label="5 estrellas">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <!-- RIGHT -->
+    <div class="about-visual reveal-right" aria-hidden="true">
+      <div class="about-ring about-ring-1"></div>
+      <div class="about-ring about-ring-2"></div>
+
+      <!-- Feature badges -->
+      <div class="about-feature about-feature-1">
+        <div class="about-feature-icon" style="--ic:rgba(39,174,96,0.25);">🌿</div>
+        <div class="about-feature-text">
+          <strong>100% Artesanal</strong>
+          <span>Sin conservantes</span>
+        </div>
+      </div>
+      <div class="about-feature about-feature-2">
+        <div class="about-feature-icon" style="--ic:rgba(255,215,0,0.2);">🇪🇨</div>
+        <div class="about-feature-text">
+          <strong>Hecho en Ecuador</strong>
+          <span>Ingredientes locales</span>
+        </div>
+      </div>
+      <div class="about-feature about-feature-3">
+        <div class="about-feature-icon" style="--ic:rgba(52,152,219,0.2);">🚚</div>
+        <div class="about-feature-text">
+          <strong>Delivery</strong>
+          <span>Envío a domicilio</span>
+        </div>
+      </div>
+      <div class="about-feature about-feature-4">
+        <div class="about-feature-icon" style="--ic:rgba(255,107,0,0.25);">⭐</div>
+        <div class="about-feature-text">
+          <strong>5 Estrellas</strong>
+          <span>+500 reseñas</span>
+        </div>
+      </div>
+
+      <!-- Central logo -->
+      <div class="about-logo-wrap">
+        <img class="about-logo-big"
+             src="LOGO AKIPAN TIENDA ONLINE.PNG"
+             alt="AkiPAN logo"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SEPARATOR ============ -->
+<div class="sep-divider" aria-hidden="true">
+  <div class="sep-line sep-line-left"></div>
+  <div class="sep-emblem">
+    <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="17" cy="17" r="16" fill="rgba(255,107,0,0.15)" stroke="rgba(255,107,0,0.4)" stroke-width="1"/>
+      <path d="M9 20 Q9 13 17 12 Q25 13 25 20 L24 23 Q17 25 10 23 Z" fill="rgba(255,140,50,0.7)" stroke="rgba(255,107,0,0.8)" stroke-width="0.8"/>
+      <path d="M13 16 Q17 14 21 16" stroke="rgba(255,215,0,0.8)" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+      <path d="M12 19 Q17 17 22 19" stroke="rgba(255,215,0,0.6)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M13 11 Q14 9 13 7" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M17 10 Q18 8 17 6" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+      <path d="M21 11 Q22 9 21 7" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" fill="none"/>
+    </svg>
+  </div>
+  <div class="sep-line sep-line-right"></div>
+</div>
+
+<!-- ============ REGISTER ============ -->
+<section id="register" aria-label="Crear cuenta">
+  <div class="register-inner">
+
+    <!-- LEFT: Benefits -->
+    <div class="register-benefits reveal-left">
+      <span class="register-label">Únete a AkiPAN</span>
+      <h2 class="register-title">Crea tu cuenta<br>y disfruta más <span>beneficios</span></h2>
+      <p class="register-subtitle">Regístrate gratis y accede a descuentos exclusivos, historial de pedidos y ofertas especiales cada semana.</p>
+
+      <div class="register-perk-list">
+        <div class="register-perk">
+          <div class="register-perk-icon">🎁</div>
+          <div>
+            <div class="register-perk-title">Descuentos exclusivos</div>
+            <div class="register-perk-desc">Accede a promociones y precios especiales solo para miembros registrados.</div>
+          </div>
+        </div>
+        <div class="register-perk">
+          <div class="register-perk-icon">📦</div>
+          <div>
+            <div class="register-perk-title">Historial de pedidos</div>
+            <div class="register-perk-desc">Revisa y repite tus pedidos favoritos con un solo clic desde tu perfil.</div>
+          </div>
+        </div>
+        <div class="register-perk">
+          <div class="register-perk-icon">🔔</div>
+          <div>
+            <div class="register-perk-title">Alertas de nuevos productos</div>
+            <div class="register-perk-desc">Sé el primero en conocer nuevas creaciones y ediciones limitadas.</div>
+          </div>
+        </div>
+        <div class="register-perk">
+          <div class="register-perk-icon">🚚</div>
+          <div>
+            <div class="register-perk-title">Delivery prioritario</div>
+            <div class="register-perk-desc">Los miembros registrados tienen prioridad en la cola de entrega.</div>
           </div>
         </div>
       </div>
+
+      <div class="register-trust">
+        <span class="register-trust-icon">🔒</span>
+        <div class="register-trust-text">
+          <strong>Tus datos están seguros</strong>
+          Nunca compartimos tu información con terceros.
+        </div>
+      </div>
     </div>
+
+    <!-- RIGHT: Form -->
+    <div class="register-card reveal-right">
+      <h3 class="register-card-title">Crear cuenta gratis</h3>
+      <p class="register-card-sub">Completa el formulario — toma menos de 1 minuto</p>
+
+      <form class="register-form" onsubmit="handleRegister(event)" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-nombre">Nombre</label>
+            <div class="form-input-wrap">
+              <input class="form-input" type="text" id="reg-nombre" placeholder="María" autocomplete="given-name" required>
+              <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-apellido">Apellido</label>
+            <div class="form-input-wrap">
+              <input class="form-input" type="text" id="reg-apellido" placeholder="González" autocomplete="family-name" required>
+              <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-email">Correo electrónico</label>
+          <div class="form-input-wrap">
+            <input class="form-input" type="email" id="reg-email" placeholder="maria@email.com" autocomplete="email" required>
+            <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="reg-tel">Teléfono</label>
+          <div class="form-input-wrap">
+            <input class="form-input" type="tel" id="reg-tel" placeholder="+593 99 000 0000" autocomplete="tel">
+            <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="reg-pass">Contraseña</label>
+            <div class="form-input-wrap">
+              <input class="form-input" type="password" id="reg-pass" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required>
+              <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="reg-pass2">Confirmar</label>
+            <div class="form-input-wrap">
+              <input class="form-input" type="password" id="reg-pass2" placeholder="Repite tu contraseña" autocomplete="new-password" required>
+              <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <label class="form-check">
+          <input type="checkbox" id="reg-terms" required>
+          <span class="form-check-label">Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de privacidad</a> de AkiPAN.</span>
+        </label>
+
+        <button type="submit" class="form-submit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          Crear mi cuenta
+        </button>
+
+        <div class="form-divider">o</div>
+        <p class="form-login-link">¿Ya tienes cuenta? <a href="#">Inicia sesión aquí</a></p>
+
+      </form>
+    </div>
+
   </div>
 </section>
+
+<!-- ============ PRE-FOOTER CTA ============ -->
+<div class="footer-cta">
+  <div class="footer-cta-inner">
+
+    <!-- Left: text -->
+    <div class="footer-cta-text">
+      <div class="footer-cta-badge">
+        <div class="footer-cta-badge-dot" aria-hidden="true"></div>
+        <span class="footer-cta-badge-text">¿Quieres algo?</span>
+      </div>
+      <h2 class="footer-cta-title">Tu próximo antojo<br><span>está aquí</span></h2>
+      <p class="footer-cta-sub">Productos artesanales listos para entregarte. Frescos, sin conservantes, con sabor ecuatoriano de verdad.</p>
+    </div>
+
+    <!-- Center: chips -->
+    <div class="footer-cta-chips" aria-hidden="true">
+      <div class="footer-cta-chip">
+        <div class="footer-cta-chip-icon" style="background:rgba(255,107,0,0.15);">🚀</div>
+        <span class="footer-cta-chip-label">Entrega rápida</span>
+      </div>
+      <div class="footer-cta-chip">
+        <div class="footer-cta-chip-icon" style="background:rgba(39,174,96,0.15);">🌿</div>
+        <span class="footer-cta-chip-label">100% Artesanal</span>
+      </div>
+      <div class="footer-cta-chip">
+        <div class="footer-cta-chip-icon" style="background:rgba(255,215,0,0.12);">🇪🇨</div>
+        <span class="footer-cta-chip-label">Hecho en Ecuador</span>
+      </div>
+    </div>
+
+    <!-- Right: actions -->
+    <div class="footer-cta-actions">
+
+      <!-- Panel 1: Ver productos -->
+      <a href="#products" class="cta-glass-panel cta-panel-orange" aria-label="Ver todos los productos">
+        <div class="cta-panel-icon">🥖</div>
+        <div class="cta-panel-body">
+          <div class="cta-panel-title">Explorar productos</div>
+          <div class="cta-panel-desc">10 creaciones artesanales disponibles hoy</div>
+        </div>
+        <div class="cta-panel-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Panel 2: WhatsApp -->
+      <a href="#" class="cta-glass-panel cta-panel-green" aria-label="Pedir por WhatsApp">
+        <div class="cta-panel-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </div>
+        <div class="cta-panel-body">
+          <div class="cta-panel-title">Pedir por WhatsApp</div>
+          <div class="cta-panel-status">
+            <div class="cta-panel-status-dot" aria-hidden="true"></div>
+            En línea · Lun–Sáb 7am–8pm
+          </div>
+        </div>
+        <div class="cta-panel-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer id="footer">
   <div class="footer-inner">
     <div class="footer-top">
+
+      <!-- Brand -->
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN"
-               onerror="this.style.display='none'">
+          <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN" onerror="this.style.display='none'">
           <span class="footer-logo-name">AkiPAN</span>
         </div>
-        <p class="footer-brand-text">
-          Sabores auténticos del Ecuador, hechos con amor y tradición artesanal. Delivery disponible en toda la ciudad.
-        </p>
+        <p class="footer-brand-text">Sabores auténticos del Ecuador, elaborados con amor y tradición artesanal. Sin conservantes, sin compromisos.</p>
         <div class="footer-socials">
-          <!-- Instagram -->
-          <a href="#" class="footer-social" aria-label="Instagram" title="Instagram">
+          <a href="#" class="footer-social" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
-          <!-- Facebook -->
-          <a href="#" class="footer-social" aria-label="Facebook" title="Facebook">
+          <a href="#" class="footer-social" aria-label="Facebook">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
-          <!-- WhatsApp -->
-          <a href="#" class="footer-social" aria-label="WhatsApp" title="WhatsApp">
+          <a href="#" class="footer-social" aria-label="WhatsApp">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           </a>
         </div>
       </div>
 
+      <!-- Productos -->
       <div class="footer-col">
         <h4>Productos</h4>
         <ul>
           <li><a href="#products">Pan de Yuca</a></li>
           <li><a href="#products">Empanadas</a></li>
           <li><a href="#products">Croissants</a></li>
-          <li><a href="#products">Tortas</a></li>
-          <li><a href="#products">Ver todo</a></li>
+          <li><a href="#products">Tres Leches</a></li>
+          <li><a href="#products">Galletas de Avena</a></li>
         </ul>
       </div>
 
+      <!-- Empresa -->
       <div class="footer-col">
         <h4>Empresa</h4>
         <ul>
           <li><a href="#about">Nosotros</a></li>
+          <li><a href="#products">Menú completo</a></li>
           <li><a href="#">Delivery</a></li>
           <li><a href="#">Contacto</a></li>
           <li><a href="#">Política de privacidad</a></li>
         </ul>
       </div>
+
+      <!-- Contacto -->
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="footer-contact-label">Teléfono</div>
+            <div class="footer-contact-value">+593 99 000 0000</div>
+          </div>
+        </div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="footer-contact-label">Correo</div>
+            <div class="footer-contact-value">info@akipan.ec</div>
+          </div>
+        </div>
+        <div class="footer-contact-item">
+          <div class="footer-contact-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="footer-contact-label">Horario</div>
+            <div class="footer-contact-value">Lun – Sáb · 7am – 8pm</div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="footer-bottom">
-      <span>© 2024 AkiPAN Tienda Online. Hecho con amor en Ecuador.</span>
-      <span>Diseñado por <a href="#">Visionarios Company</a></span>
+    <!-- Bottom bar -->
+    <div class="footer-bottom-wrap">
+      <div class="footer-flag" aria-label="Colores bandera Ecuador">
+        <div class="footer-flag-dot" style="background:#F4D000;color:#F4D000;"></div>
+        <div class="footer-flag-dot" style="background:#003893;color:#003893;"></div>
+        <div class="footer-flag-dot" style="background:#CF142B;color:#CF142B;"></div>
+      </div>
+      <span class="footer-bottom-copy">© 2026 AkiPAN Tienda Online · Hecho con amor en Ecuador</span>
+      <div class="footer-bottom-right">
+        <a href="#" class="footer-bottom-link">Privacidad</a>
+        <a href="#" class="footer-bottom-link">Términos</a>
+        <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+      </div>
     </div>
+
   </div>
 </footer>
 
 <!-- ============ CART SIDEBAR ============ -->
 <div id="cart-overlay" role="presentation" aria-hidden="true"></div>
 <aside id="cart-sidebar" aria-label="Carrito de compras" aria-hidden="true" role="dialog">
+
   <div class="cart-head">
-    <h2>Tu carrito</h2>
-    <button id="close-cart" aria-label="Cerrar carrito">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div class="cart-items" id="cart-items-list">
-    <div class="cart-empty">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-      <span>Tu carrito está vacío</span>
+    <div class="cart-head-top">
+      <div class="cart-head-left">
+        <div class="cart-head-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        </div>
+        <h2>Tu carrito</h2>
+        <span class="cart-head-badge" id="cart-head-count" aria-live="polite">0</span>
+      </div>
+      <button id="close-cart" aria-label="Cerrar carrito">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
     </div>
   </div>
+
+  <div class="cart-items" id="cart-items-list">
+    <div class="cart-empty">
+      <div class="cart-empty-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+      </div>
+      <p class="cart-empty-title">Tu carrito está vacío</p>
+      <p class="cart-empty-desc">Agrega productos artesanales y disfruta de los sabores del Ecuador.</p>
+      <a href="#products" class="cart-empty-cta" onclick="closeCart()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        Ver productos
+      </a>
+    </div>
+  </div>
+
   <div class="cart-foot" id="cart-foot" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-summary-row">
+        <span class="cart-summary-label">Subtotal</span>
+        <span class="cart-summary-value" id="cart-subtotal">$0.00</span>
+      </div>
+      <div class="cart-summary-row">
+        <span class="cart-summary-label">Delivery</span>
+        <span class="cart-summary-value free">Gratis</span>
+      </div>
+      <div class="cart-summary-divider"></div>
+    </div>
     <div class="cart-total">
       <span class="cart-total-label">Total</span>
       <span class="cart-total-price" id="cart-total-price">$0.00</span>
     </div>
     <button class="cart-checkout" aria-label="Proceder al pago">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       Proceder al pago
     </button>
+    <div class="cart-secure" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Pago 100% seguro · Datos protegidos
+    </div>
   </div>
+
 </aside>
 
 <!-- ============ TOAST ============ -->
@@ -1735,19 +3276,28 @@ function showToast(msg) {
 /* ============================================
    RENDER PRODUCTS
 ============================================ */
-function renderProducts() {
+const CAT_COLORS = {
+  'Panadería':  'radial-gradient(circle at 40% 55%, rgba(255,107,0,0.22) 0%, rgba(0,0,0,0.35) 70%)',
+  'Frituras':   'radial-gradient(circle at 40% 55%, rgba(255,215,0,0.20) 0%, rgba(0,0,0,0.35) 70%)',
+  'Especiales': 'radial-gradient(circle at 40% 55%, rgba(192,57,43,0.22) 0%, rgba(0,0,0,0.35) 70%)',
+  'Bollería':   'radial-gradient(circle at 40% 55%, rgba(255,140,50,0.20) 0%, rgba(0,0,0,0.35) 70%)',
+  'Pasteles':   'radial-gradient(circle at 40% 55%, rgba(155,89,182,0.22) 0%, rgba(0,0,0,0.35) 70%)',
+  'Dulces':     'radial-gradient(circle at 40% 55%, rgba(39,174,96,0.20)  0%, rgba(0,0,0,0.35) 70%)',
+  'Galletas':   'radial-gradient(circle at 40% 55%, rgba(52,152,219,0.20) 0%, rgba(0,0,0,0.35) 70%)',
+};
+
+function renderProducts(filter = 'all') {
   const grid = document.getElementById('products-grid');
-  grid.innerHTML = PRODUCTS.map((p, i) => `
-    <article class="product-card reveal" style="transition-delay:${i * 70}ms" role="listitem"
-             data-id="${p.id}"
+  const list = filter === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === filter);
+  grid.innerHTML = list.map((p, i) => `
+    <article class="product-card reveal" style="transition-delay:${i * 60}ms" role="listitem"
+             data-id="${p.id}" data-cat="${p.cat}"
              onmousemove="handleCardTilt(event,this)"
              onmouseleave="resetCardTilt(this)"
-             onmouseenter="document.body.classList.add('hovering')"
              aria-label="${p.name} - $${p.price.toFixed(2)}">
       <div class="product-shine" aria-hidden="true"></div>
-      <div class="product-glow" aria-hidden="true"></div>
       <div class="product-card-inner">
-        <div class="product-img-wrap">
+        <div class="product-img-wrap" style="--card-bg:${CAT_COLORS[p.cat]||CAT_COLORS['Panadería']}">
           <span class="product-emoji" aria-hidden="true">${p.emoji}</span>
           <span class="product-badge ${p.badgeType}">${p.badge}</span>
         </div>
@@ -1755,18 +3305,73 @@ function renderProducts() {
           <div class="product-category">${p.cat}</div>
           <h3 class="product-name">${p.name}</h3>
           <p class="product-desc">${p.desc}</p>
+          <div class="product-divider"></div>
           <div class="product-footer">
-            <div class="product-price">$${p.price.toFixed(2)} <span>USD</span></div>
+            <div class="product-price">
+              <span class="product-price-label">Precio</span>
+              <span class="product-price-value">$${p.price.toFixed(2)}<span>USD</span></span>
+            </div>
             <button class="add-to-cart"
                     onclick="handleAddToCart(event, ${p.id}, this)"
                     aria-label="Añadir ${p.name} al carrito">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+              Agregar
             </button>
           </div>
         </div>
       </div>
     </article>
   `).join('');
+  setTimeout(observeReveal, 50);
+}
+
+/* ============================================
+   REGISTER FORM
+============================================ */
+function handleRegister(e) {
+  e.preventDefault();
+  const nombre   = document.getElementById('reg-nombre').value.trim();
+  const apellido = document.getElementById('reg-apellido').value.trim();
+  const email    = document.getElementById('reg-email').value.trim();
+  const pass     = document.getElementById('reg-pass').value;
+  const pass2    = document.getElementById('reg-pass2').value;
+  const terms    = document.getElementById('reg-terms').checked;
+  const btn      = e.target.querySelector('.form-submit');
+
+  if (!nombre || !apellido || !email || !pass) { showToast('Por favor completa todos los campos requeridos.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Ingresa un correo electrónico válido.'); return; }
+  if (pass.length < 8) { showToast('La contraseña debe tener al menos 8 caracteres.'); return; }
+  if (pass !== pass2)  { showToast('Las contraseñas no coinciden.'); return; }
+  if (!terms) { showToast('Debes aceptar los términos y condiciones.'); return; }
+
+  // Loading state
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="16" height="16"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" style="animation:spinLoad 1s linear infinite;transform-origin:center"/></svg> Creando cuenta...`;
+  btn.style.opacity = '0.8';
+  btn.disabled = true;
+
+  setTimeout(() => {
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> ¡Cuenta creada!`;
+    btn.style.background = 'var(--green)';
+    btn.style.opacity = '1';
+    showToast('🎉 ¡Bienvenido a AkiPAN, ' + nombre + '!');
+    e.target.reset();
+    setTimeout(() => {
+      btn.innerHTML = originalHTML;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }, 1800);
+}
+
+function initFilters() {
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts(btn.dataset.filter);
+    });
+  });
 }
 
 function handleAddToCart(e, id, btn) {
@@ -1802,71 +3407,20 @@ function handleCardTilt(e, card) {
 }
 function resetCardTilt(card) {
   card.style.transform = '';
-  document.body.classList.remove('hovering');
-}
-
-/* ============================================
-   CUSTOM CURSOR
-============================================ */
-const cursorDot  = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
-let mouseX = 0, mouseY = 0;
-let ringX = 0, ringY = 0;
-const particles = [];
-let lastParticle = 0;
-
-const particleColors = ['#FF6B00','#FFD700','#C0392B','#27AE60','#FF8C3A'];
-
-document.addEventListener('mousemove', e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursorDot.style.left = mouseX + 'px';
-  cursorDot.style.top  = mouseY + 'px';
-
-  const now = Date.now();
-  if (now - lastParticle > 60) {
-    lastParticle = now;
-    spawnCursorParticle(mouseX, mouseY);
   }
-});
 
-function spawnCursorParticle(x, y) {
-  const el = document.createElement('div');
-  el.className = 'cursor-particle';
-  const color = particleColors[Math.floor(Math.random() * particleColors.length)];
-  const size  = 4 + Math.random() * 5;
-  el.style.cssText = `left:${x}px;top:${y}px;width:${size}px;height:${size}px;background:${color};`;
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 700);
-}
-
-function animateCursor() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  cursorRing.style.left = ringX + 'px';
-  cursorRing.style.top  = ringY + 'px';
-  requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-// Hover detection
-document.querySelectorAll('a, button, .product-card, .add-to-cart, .qty-btn, .footer-social').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-});
 
 /* ============================================
-   PARALLAX
+   HERO VISUAL PARALLAX (subtle depth on scroll)
 ============================================ */
-const parallaxLayers = document.querySelectorAll('[data-parallax]');
 let ticking = false;
+const heroVisual = document.querySelector('.hero-visual');
+const heroBgGlow = document.querySelector('.hero-bg-glow');
 
 function updateParallax() {
   const sy = window.scrollY;
-  parallaxLayers.forEach(el => {
-    const speed = parseFloat(el.dataset.parallax);
-    el.style.transform = `translateY(${sy * speed}px)`;
-  });
+  if (heroVisual) heroVisual.style.transform = `translateY(${sy * 0.08}px)`;
+  if (heroBgGlow) heroBgGlow.style.transform = `translateY(calc(-50% + ${sy * 0.12}px))`;
   ticking = false;
 }
 
@@ -1935,22 +3489,24 @@ function spawnSparks(delayMs) {
   setTimeout(() => {
     const wrap = document.getElementById('sparks');
     if (!wrap) return;
-    const colors = ['#FF6B00','#FFD700','#FF8C3A','#C0392B','#27AE60','#FFF8F0'];
-    for (let i = 0; i < 10; i++) {
+    const colors = ['#F4D000','#F4D000','#003893','#003893','#CF142B','#CF142B','#F4D000','#003893','#CF142B','#ffffff'];
+    for (let i = 0; i < 14; i++) {
       const dot = document.createElement('div');
       dot.className = 'pre-spark-dot';
-      const angle = (i / 10) * Math.PI * 2;
-      const dist  = 24 + Math.random() * 28;
+      const angle = (i / 14) * Math.PI * 2;
+      const dist  = 30 + Math.random() * 40;
+      const size  = 5 + Math.random() * 5;
       dot.style.cssText = `
         background:${colors[i % colors.length]};
+        color:${colors[i % colors.length]};
         --sx:${Math.cos(angle)*dist}px;
-        --sy:${Math.sin(angle)*dist - 10}px;
-        --dur:0.5s; --t:0s;
-        width:${4+Math.random()*4}px;
-        height:${4+Math.random()*4}px;
+        --sy:${Math.sin(angle)*dist - 14}px;
+        --dur:1.8s; --t:0s;
+        width:${size}px;
+        height:${size}px;
       `;
       wrap.appendChild(dot);
-      setTimeout(() => dot.remove(), 600);
+      setTimeout(() => dot.remove(), 2200);
     }
   }, delayMs);
 }
@@ -1965,7 +3521,7 @@ function runPreloader() {
   const pct    = document.getElementById('pre-percent');
 
   // Jiggle cart when each item lands
-  const jiggleTimes = [1050, 1450, 1850, 2250];
+  const jiggleTimes = [500, 750, 1000, 1250];
   jiggleTimes.forEach((t, i) => {
     setTimeout(() => {
       spawnSparks(0);
@@ -1977,11 +3533,11 @@ function runPreloader() {
 
   // Progress bar — synced to ~3.8s total
   const milestones = [
-    { target: 20,  delay: 0 },
-    { target: 50,  delay: 800 },
-    { target: 75,  delay: 1600 },
-    { target: 90,  delay: 2200 },
-    { target: 100, delay: 2800 },
+    { target: 25,  delay: 0 },
+    { target: 55,  delay: 400 },
+    { target: 80,  delay: 800 },
+    { target: 95,  delay: 1200 },
+    { target: 100, delay: 1600 },
   ];
   milestones.forEach(({ target, delay }) => {
     setTimeout(() => {
@@ -1994,7 +3550,7 @@ function runPreloader() {
   setTimeout(() => {
     loader.classList.add('hidden');
     setTimeout(() => loader.remove(), 950);
-  }, 3800);
+  }, 2000);
 }
 
 /* ============================================
@@ -2003,6 +3559,7 @@ function runPreloader() {
 document.addEventListener('DOMContentLoaded', () => {
   createBgParticles();
   renderProducts();
+  initFilters();
   renderCart();
   updateCartCount();
   runPreloader();
@@ -2012,14 +3569,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setTimeout(observeReveal, 100);
 
   // Hover on dynamically created elements
-  document.getElementById('products-grid').addEventListener('mouseover', e => {
-    const card = e.target.closest('.product-card');
-    if (card) document.body.classList.add('hovering');
-  });
-  document.getElementById('products-grid').addEventListener('mouseout', e => {
-    const card = e.target.closest('.product-card');
-    if (card && !card.contains(e.relatedTarget)) document.body.classList.remove('hovering');
-  });
 });
 </script>
 </body>

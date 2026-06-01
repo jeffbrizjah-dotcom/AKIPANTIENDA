@@ -250,7 +250,103 @@ ul { list-style: none; }
   .pre-logo-img { width: 84px; }
   .pre-progress-wrap { width: 160px; }
 }
+</style>
+</head>
+<body>
 
+
+<!-- ============ PRELOADER ============ -->
+<div id="preloader" role="status" aria-label="Cargando AKIPAN" style="position:fixed;inset:0;background:#0a0300;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;overflow:hidden;transition:opacity .9s ease">
+
+  <!-- Cart scene -->
+  <div class="pre-scene" aria-hidden="true">
+
+    <!-- Flying food items -->
+    <div class="pre-food" style="--sx:-220px;--sy:-160px;--sr:-30deg;--t:0.8s;--dur:0.5s;left:50%;top:50%;">🥖</div>
+    <div class="pre-food" style="--sx: 210px;--sy:-140px;--sr: 25deg;--t:1.2s;--dur:0.5s;left:50%;top:50%;">🎂</div>
+    <div class="pre-food" style="--sx:-190px;--sy: 60px; --sr:-20deg;--t:1.6s;--dur:0.5s;left:50%;top:50%;">🥐</div>
+    <div class="pre-food" style="--sx: 200px;--sy: 50px; --sr: 30deg;--t:2.0s;--dur:0.5s;left:50%;top:50%;">🍪</div>
+
+    <!-- Spark dots (4 sets timed to each item landing) -->
+    <div class="pre-spark" id="sparks" style="bottom:28px;"></div>
+
+    <!-- Glow under cart -->
+    <div class="pre-glow-ring"></div>
+
+    <!-- Cart -->
+    <div class="pre-cart-wrap" id="pre-cart">
+      <svg class="pre-cart-svg" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Handle -->
+        <path d="M 30 20 Q 30 8 44 8 L 156 8 Q 170 8 170 20 L 170 38" stroke="#FF6B00" stroke-width="7" stroke-linecap="round" fill="none"/>
+        <!-- Cart body -->
+        <rect x="18" y="38" width="164" height="86" rx="14" fill="rgba(255,107,0,0.12)" stroke="#FF6B00" stroke-width="3.5"/>
+        <!-- Inner glow -->
+        <rect x="26" y="46" width="148" height="70" rx="10" fill="rgba(255,107,0,0.07)"/>
+        <!-- Divider lines -->
+        <line x1="18" y1="62" x2="182" y2="62" stroke="rgba(255,107,0,0.25)" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <!-- Cart items (pop in one by one) -->
+        <g class="pre-cart-item" style="--t:1.05s">
+          <rect x="36" y="68" width="32" height="28" rx="6" fill="rgba(255,140,50,0.5)" stroke="rgba(255,140,50,0.8)" stroke-width="1.5"/>
+          <text x="52" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🥖</text>
+        </g>
+        <g class="pre-cart-item" style="--t:1.45s">
+          <rect x="78" y="68" width="32" height="28" rx="6" fill="rgba(255,215,0,0.35)" stroke="rgba(255,215,0,0.7)" stroke-width="1.5"/>
+          <text x="94" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🎂</text>
+        </g>
+        <g class="pre-cart-item" style="--t:1.85s">
+          <rect x="120" y="68" width="32" height="28" rx="6" fill="rgba(192,57,43,0.35)" stroke="rgba(192,57,43,0.7)" stroke-width="1.5"/>
+          <text x="136" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🥐</text>
+        </g>
+        <g class="pre-cart-item" style="--t:2.25s">
+          <!-- Extra item peek -->
+          <circle cx="164" cy="76" r="10" fill="rgba(39,174,96,0.35)" stroke="rgba(39,174,96,0.7)" stroke-width="1.5"/>
+          <text x="164" y="81" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">+1</text>
+        </g>
+        <!-- Price tag -->
+        <g class="pre-cart-item" style="--t:2.4s">
+          <rect x="68" y="112" width="64" height="22" rx="11" fill="rgba(255,107,0,0.9)"/>
+          <text x="100" y="127" font-size="11" font-weight="bold" text-anchor="middle" fill="white" font-family="sans-serif" letter-spacing="0.5">¡Listo!</text>
+        </g>
+        <!-- Left wheel -->
+        <g class="pre-wheel" style="transform-box:fill-box;" transform="translate(46,130)">
+          <circle cx="0" cy="0" r="16" fill="#1a0800" stroke="#FF6B00" stroke-width="4"/>
+          <line x1="-10" y1="0" x2="10" y2="0" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="0" y1="-10" x2="0" y2="10" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="4" fill="#FF6B00"/>
+        </g>
+        <!-- Right wheel -->
+        <g class="pre-wheel" style="transform-box:fill-box;" transform="translate(154,130)">
+          <circle cx="0" cy="0" r="16" fill="#1a0800" stroke="#FF6B00" stroke-width="4"/>
+          <line x1="-10" y1="0" x2="10" y2="0" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="0" y1="-10" x2="0" y2="10" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="0" cy="0" r="4" fill="#FF6B00"/>
+        </g>
+        <!-- Shine -->
+        <path d="M 32 46 Q 60 40 90 44" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round" fill="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Logo -->
+  <div class="pre-logo-wrap">
+    <img class="pre-logo-img"
+         src="LOGO AKIPAN TIENDA ONLINE.PNG"
+         alt="AKIPAN Tienda Online"
+         onerror="this.style.display='none'">
+    <p class="pre-tagline">Tienda Online · Ecuador</p>
+  </div>
+
+  <!-- Progress -->
+  <div class="pre-progress-wrap">
+    <div class="pre-progress-track">
+      <div class="pre-progress-bar" id="pre-bar"></div>
+    </div>
+    <span class="pre-progress-text" id="pre-percent">0%</span>
+  </div>
+
+</div>
+
+<style>
 /* ============================================
    NAVBAR
 ============================================ */
@@ -2312,101 +2408,8 @@ ul { list-style: none; }
 @media(prefers-reduced-motion:reduce) {
   *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
 }
+
 </style>
-</head>
-<body>
-
-
-<!-- ============ PRELOADER ============ -->
-<div id="preloader" role="status" aria-label="Cargando AKIPAN">
-
-  <!-- Cart scene -->
-  <div class="pre-scene" aria-hidden="true">
-
-    <!-- Flying food items -->
-    <div class="pre-food" style="--sx:-220px;--sy:-160px;--sr:-30deg;--t:0.8s;--dur:0.5s;left:50%;top:50%;">🥖</div>
-    <div class="pre-food" style="--sx: 210px;--sy:-140px;--sr: 25deg;--t:1.2s;--dur:0.5s;left:50%;top:50%;">🎂</div>
-    <div class="pre-food" style="--sx:-190px;--sy: 60px; --sr:-20deg;--t:1.6s;--dur:0.5s;left:50%;top:50%;">🥐</div>
-    <div class="pre-food" style="--sx: 200px;--sy: 50px; --sr: 30deg;--t:2.0s;--dur:0.5s;left:50%;top:50%;">🍪</div>
-
-    <!-- Spark dots (4 sets timed to each item landing) -->
-    <div class="pre-spark" id="sparks" style="bottom:28px;"></div>
-
-    <!-- Glow under cart -->
-    <div class="pre-glow-ring"></div>
-
-    <!-- Cart -->
-    <div class="pre-cart-wrap" id="pre-cart">
-      <svg class="pre-cart-svg" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Handle -->
-        <path d="M 30 20 Q 30 8 44 8 L 156 8 Q 170 8 170 20 L 170 38" stroke="#FF6B00" stroke-width="7" stroke-linecap="round" fill="none"/>
-        <!-- Cart body -->
-        <rect x="18" y="38" width="164" height="86" rx="14" fill="rgba(255,107,0,0.12)" stroke="#FF6B00" stroke-width="3.5"/>
-        <!-- Inner glow -->
-        <rect x="26" y="46" width="148" height="70" rx="10" fill="rgba(255,107,0,0.07)"/>
-        <!-- Divider lines -->
-        <line x1="18" y1="62" x2="182" y2="62" stroke="rgba(255,107,0,0.25)" stroke-width="1.5" stroke-dasharray="6 4"/>
-        <!-- Cart items (pop in one by one) -->
-        <g class="pre-cart-item" style="--t:1.05s">
-          <rect x="36" y="68" width="32" height="28" rx="6" fill="rgba(255,140,50,0.5)" stroke="rgba(255,140,50,0.8)" stroke-width="1.5"/>
-          <text x="52" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🥖</text>
-        </g>
-        <g class="pre-cart-item" style="--t:1.45s">
-          <rect x="78" y="68" width="32" height="28" rx="6" fill="rgba(255,215,0,0.35)" stroke="rgba(255,215,0,0.7)" stroke-width="1.5"/>
-          <text x="94" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🎂</text>
-        </g>
-        <g class="pre-cart-item" style="--t:1.85s">
-          <rect x="120" y="68" width="32" height="28" rx="6" fill="rgba(192,57,43,0.35)" stroke="rgba(192,57,43,0.7)" stroke-width="1.5"/>
-          <text x="136" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🥐</text>
-        </g>
-        <g class="pre-cart-item" style="--t:2.25s">
-          <!-- Extra item peek -->
-          <circle cx="164" cy="76" r="10" fill="rgba(39,174,96,0.35)" stroke="rgba(39,174,96,0.7)" stroke-width="1.5"/>
-          <text x="164" y="81" font-size="11" text-anchor="middle" fill="white" font-family="sans-serif">+1</text>
-        </g>
-        <!-- Price tag -->
-        <g class="pre-cart-item" style="--t:2.4s">
-          <rect x="68" y="112" width="64" height="22" rx="11" fill="rgba(255,107,0,0.9)"/>
-          <text x="100" y="127" font-size="11" font-weight="bold" text-anchor="middle" fill="white" font-family="sans-serif" letter-spacing="0.5">¡Listo!</text>
-        </g>
-        <!-- Left wheel -->
-        <g class="pre-wheel" style="transform-box:fill-box;" transform="translate(46,130)">
-          <circle cx="0" cy="0" r="16" fill="#1a0800" stroke="#FF6B00" stroke-width="4"/>
-          <line x1="-10" y1="0" x2="10" y2="0" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="0" y1="-10" x2="0" y2="10" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="0" cy="0" r="4" fill="#FF6B00"/>
-        </g>
-        <!-- Right wheel -->
-        <g class="pre-wheel" style="transform-box:fill-box;" transform="translate(154,130)">
-          <circle cx="0" cy="0" r="16" fill="#1a0800" stroke="#FF6B00" stroke-width="4"/>
-          <line x1="-10" y1="0" x2="10" y2="0" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="0" y1="-10" x2="0" y2="10" stroke="rgba(255,107,0,0.5)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="0" cy="0" r="4" fill="#FF6B00"/>
-        </g>
-        <!-- Shine -->
-        <path d="M 32 46 Q 60 40 90 44" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round" fill="none"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Logo -->
-  <div class="pre-logo-wrap">
-    <img class="pre-logo-img"
-         src="LOGO AKIPAN TIENDA ONLINE.PNG"
-         alt="AKIPAN Tienda Online"
-         onerror="this.style.display='none'">
-    <p class="pre-tagline">Tienda Online · Ecuador</p>
-  </div>
-
-  <!-- Progress -->
-  <div class="pre-progress-wrap">
-    <div class="pre-progress-track">
-      <div class="pre-progress-bar" id="pre-bar"></div>
-    </div>
-    <span class="pre-progress-text" id="pre-percent">0%</span>
-  </div>
-
-</div>
 
 <!-- ============ BACKGROUND PARTICLES ============ -->
 <div id="particles-wrap" aria-hidden="true"></div>

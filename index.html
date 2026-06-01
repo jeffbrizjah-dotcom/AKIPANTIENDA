@@ -237,6 +237,18 @@ ul { list-style: none; }
   font-family: var(--font-body);
 }
 
+/* ── PRELOADER RESPONSIVE ── */
+@media(max-width:768px) {
+  #preloader { gap: 20px; }
+  .pre-scene { transform: scale(0.82); transform-origin: center bottom; }
+}
+@media(max-width:480px) {
+  #preloader { gap: 12px; }
+  .pre-scene { transform: scale(0.64); transform-origin: center bottom; margin-bottom: -40px; }
+  .pre-logo-img { width: 84px; }
+  .pre-progress-wrap { width: 160px; }
+}
+
 /* ============================================
    NAVBAR
 ============================================ */
@@ -3418,20 +3430,33 @@ function spawnSparks(delayMs) {
 /* ============================================
    PRELOADER SEQUENCE
 ============================================ */
+function dismissPreloader() {
+  const loader = document.getElementById('preloader');
+  if (!loader || loader.classList.contains('hidden')) return;
+  loader.classList.add('hidden');
+  setTimeout(() => { try { loader.remove(); } catch(e){} }, 950);
+}
+
 function runPreloader() {
   const loader = document.getElementById('preloader');
   const cart   = document.getElementById('pre-cart');
   const bar    = document.getElementById('pre-bar');
   const pct    = document.getElementById('pre-percent');
+  // Safety fallback — always closes
+  setTimeout(dismissPreloader, 4500);
 
   // Jiggle cart when each item lands
   const jiggleTimes = [400, 700, 1100, 1500];
   jiggleTimes.forEach((t, i) => {
     setTimeout(() => {
-      spawnSparks(0);
-      cart.classList.remove('jiggle1','jiggle2','jiggle3','jiggle4');
-      void cart.offsetWidth; // reflow to restart animation
-      cart.classList.add('jiggle' + (i + 1));
+      try {
+        spawnSparks(0);
+        if (cart) {
+          cart.classList.remove('jiggle1','jiggle2','jiggle3','jiggle4');
+          void cart.offsetWidth;
+          cart.classList.add('jiggle' + (i + 1));
+        }
+      } catch(e) {}
     }, t);
   });
 
@@ -3447,10 +3472,7 @@ function runPreloader() {
   });
 
   // Dismiss
-  setTimeout(() => {
-    loader.classList.add('hidden');
-    setTimeout(() => loader.remove(), 950);
-  }, 2200);
+  setTimeout(dismissPreloader, 2200);
 }
 
 /* ============================================

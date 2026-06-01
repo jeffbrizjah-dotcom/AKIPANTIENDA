@@ -8,7 +8,9 @@
 <link rel="apple-touch-icon" href="LOGO AKIPAN TIENDA ONLINE.PNG">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<!-- Non-blocking font load — no render delay on mobile -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"></noscript>
 <style>
 /* ============================================
    CSS CUSTOM PROPERTIES
@@ -3442,8 +3444,11 @@ function runPreloader() {
   const cart   = document.getElementById('pre-cart');
   const bar    = document.getElementById('pre-bar');
   const pct    = document.getElementById('pre-percent');
-  // Safety fallback — always closes
-  setTimeout(dismissPreloader, 4500);
+  // Duration: shorter on mobile/tablet
+  const isMobile = window.innerWidth < 1024;
+  const duration = isMobile ? 2000 : 2200;
+  // Safety fallback
+  setTimeout(dismissPreloader, duration + 2000);
 
   // Jiggle cart when each item lands
   const jiggleTimes = [400, 700, 1100, 1500];
@@ -3460,10 +3465,11 @@ function runPreloader() {
     }, t);
   });
 
-  // Progress bar — synced to ~3.8s total
+  // Progress bar fills in sync with duration
   const milestones = [
     { target: 100, delay: 0 },
   ];
+  if (bar) bar.style.transition = `width ${(duration - 200) / 1000}s cubic-bezier(0.4,0,0.2,1)`;
   milestones.forEach(({ target, delay }) => {
     setTimeout(() => {
       bar.style.width = target + '%';
@@ -3472,21 +3478,27 @@ function runPreloader() {
   });
 
   // Dismiss
-  setTimeout(dismissPreloader, 2200);
+  setTimeout(dismissPreloader, duration);
 }
 
 /* ============================================
    INIT
 ============================================ */
+// Preloader starts immediately — no waiting for fonts/assets
+// On mobile/tablet use shorter duration
+if (window.innerWidth < 1024) {
+  document.documentElement.style.setProperty('--pre-duration', '2000');
+}
+runPreloader();
+
+// Rest of init after DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   createBgParticles();
   renderProducts();
   initFilters();
   renderCart();
   updateCartCount();
-  runPreloader();
   observeReveal();
-
   setTimeout(observeReveal, 100);
 });
 </script>

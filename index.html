@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AkiPAN - Tienda Online | Sabores del Ecuador</title>
+<title>AKIPAN - Tienda Online | Sabores del Ecuador</title>
+<link rel="icon" type="image/png" href="LOGO AKIPAN TIENDA ONLINE.PNG">
+<link rel="apple-touch-icon" href="LOGO AKIPAN TIENDA ONLINE.PNG">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -16,21 +18,12 @@
   --orange-light: #FF8C3A;
   --orange-dark:  #D95A00;
   --yellow:       #FFD700;
-  --red:          #C0392B;
   --green:        #27AE60;
   --cream:        #FFF8F0;
-  --cream-dark:   #FEF0DC;
   --brown:        #78350F;
-  --brown-light:  #92400E;
-  --white:        #FFFFFF;
-  --glass-bg:     rgba(255,255,255,0.12);
-  --glass-border: rgba(255,255,255,0.25);
-  --shadow-warm:  0 8px 32px rgba(255,107,0,0.25);
-  --shadow-deep:  0 20px 60px rgba(120,53,15,0.35);
   --font-display: 'Playfair Display SC', serif;
   --font-body:    'Karla', sans-serif;
   --z-preloader:  9999;
-  --z-cursor:     9998;
   --z-navbar:     100;
   --z-cart:       200;
   --z-overlay:    150;
@@ -74,19 +67,6 @@ ul { list-style: none; }
 }
 #preloader.hidden { opacity: 0; pointer-events: none; }
 
-/* Ambient glow orbs */
-.pre-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  pointer-events: none;
-  animation: orbPulse var(--dur,6s) var(--delay,0s) infinite ease-in-out;
-}
-@keyframes orbPulse {
-  0%,100% { opacity: var(--op,0.45); transform: scale(1); }
-  50%      { opacity: calc(var(--op,0.45) * 1.3); transform: scale(1.12); }
-}
-
 /* ── CART SCENE ── */
 .pre-scene {
   position: relative;
@@ -103,6 +83,7 @@ ul { list-style: none; }
   animation: cartEntrance 0.7s 0.1s both cubic-bezier(0.34,1.56,0.64,1);
   transform-origin: bottom center;
   filter: drop-shadow(0 12px 32px rgba(255,107,0,0.35));
+  will-change: transform;
 }
 @keyframes cartEntrance {
   from { opacity: 0; transform: translateY(50px) scale(0.7); }
@@ -129,9 +110,8 @@ ul { list-style: none; }
 /* Wheel spin */
 .pre-wheel {
   transform-origin: center;
-  animation: wheelSpin 1.2s 0.8s linear infinite;
+  animation: orbitSpin 1.2s 0.8s linear infinite;
 }
-@keyframes wheelSpin { to { transform: rotate(360deg); } }
 
 /* Items inside cart — pop in one by one */
 .pre-cart-item {
@@ -226,18 +206,6 @@ ul { list-style: none; }
 }
 
 /* ── LABEL ── */
-.pre-label {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: rgba(255,255,255,0.4);
-  letter-spacing: 2px;
-  animation: fadeUp 0.6s 2.6s both;
-}
-.pre-label span {
-  color: var(--orange);
-  font-weight: 600;
-}
-
 /* ── PROGRESS ── */
 .pre-progress-wrap {
   width: 200px;
@@ -245,7 +213,7 @@ ul { list-style: none; }
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  animation: fadeUp 0.6s 2.7s both;
+  animation: fadeUp 0.5s 0.5s both;
 }
 .pre-progress-track {
   width: 100%;
@@ -259,7 +227,7 @@ ul { list-style: none; }
   background: linear-gradient(90deg, var(--orange), var(--yellow));
   border-radius: 2px;
   width: 0%;
-  transition: width 0.3s ease;
+  transition: width 1.8s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 0 8px var(--orange);
 }
 .pre-progress-text {
@@ -267,17 +235,6 @@ ul { list-style: none; }
   color: rgba(255,255,255,0.35);
   letter-spacing: 2px;
   font-family: var(--font-body);
-}
-
-/* ============================================
-   BACKGROUND PARALLAX CANVAS
-============================================ */
-#bg-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.55;
 }
 
 /* ============================================
@@ -323,10 +280,28 @@ ul { list-style: none; }
 }
 .nav-logo img { width: 42px; height: 42px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(255,107,0,0.4)); }
 .nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  line-height: 1;
+}
+.nav-logo-brand {
   font-family: var(--font-display);
   font-size: 17px;
-  color: white;
   letter-spacing: 0.5px;
+  line-height: 1.1;
+}
+.nav-logo-brand .aki { color: white; }
+.nav-logo-brand .pan { color: var(--orange); }
+.nav-logo-sub {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  line-height: 1;
+  margin-top: 2px;
 }
 
 .nav-links {
@@ -364,24 +339,6 @@ ul { list-style: none; }
 
 .nav-actions { display: flex; gap: 12px; align-items: center; }
 
-.nav-order-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: var(--orange);
-  color: white;
-  font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all var(--transition);
-  box-shadow: 0 4px 16px rgba(255,107,0,0.35);
-  border: none;
-  letter-spacing: 0.3px;
-}
-.nav-order-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,0,0.5); background: var(--orange-light); }
 
 #cart-btn {
   position: relative;
@@ -458,6 +415,7 @@ ul { list-style: none; }
   will-change: transform;
 }
 /* Main warm light — right side */
+.hero-blob { will-change: transform, opacity; }
 .hero-blob-1 {
   width: min(700px, 60vw);
   height: min(600px, 55vw);
@@ -798,6 +756,7 @@ ul { list-style: none; }
   top: 50%; left: 50%;
   width: 0; height: 0;
   animation: orbitSpin var(--dur,12s) var(--delay,0s) linear infinite;
+  will-change: transform;
 }
 @keyframes orbitSpin { to { transform: rotate(360deg); } }
 
@@ -835,53 +794,11 @@ ul { list-style: none; }
   font-family: var(--font-body);
 }
 
-/* Floating accent lines */
-.hero-accent-line {
-  position: absolute;
-  pointer-events: none;
-  animation: accentFloat var(--dur,6s) var(--delay,0s) ease-in-out infinite;
-}
-@keyframes accentFloat {
-  0%,100% { transform: translateY(0) rotate(var(--rot,0deg)); opacity: var(--op,0.4); }
-  50%     { transform: translateY(-12px) rotate(calc(var(--rot,0deg) + 5deg)); opacity: calc(var(--op,0.4) * 0.6); }
-}
-
-/* Hero scroll indicator */
-.hero-scroll {
-  position: absolute;
-  bottom: 32px;
-  left: max(64px,7vw);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: rgba(255,255,255,0.3);
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  animation: heroFadeUp 0.7s 2.2s both;
-  font-family: var(--font-body);
-}
-.hero-scroll-line {
-  width: 40px;
-  height: 1px;
-  background: linear-gradient(to right, var(--orange), transparent);
-  border-radius: 1px;
-  animation: scrollPulse 2s infinite;
-}
-@keyframes scrollPulse {
-  0%,100% { transform: scaleX(1); opacity: 0.5; }
-  50%     { transform: scaleX(1.3); opacity: 1; }
-}
 
 @keyframes heroFadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 /* ============================================
    SECTION SEPARATOR
 ============================================ */
@@ -1353,7 +1270,6 @@ ul { list-style: none; }
   height: 70%;
   object-fit: contain;
   filter: drop-shadow(0 4px 20px rgba(255,107,0,0.4));
-  animation: chefBob 3s infinite ease-in-out;
 }
 
 /* Decorative rings */
@@ -1382,6 +1298,7 @@ ul { list-style: none; }
   box-shadow: 0 8px 24px rgba(0,0,0,0.4);
   animation: featureFloat var(--dur,5s) var(--delay,0s) ease-in-out infinite;
   min-width: 150px;
+  will-change: transform;
 }
 @keyframes featureFloat {
   0%,100% { transform: translateY(0); }
@@ -1408,8 +1325,6 @@ ul { list-style: none; }
 .about-feature-3 { bottom: 4%; left: 2%;   --dur:7s;   --delay:0.5s; }
 .about-feature-4 { bottom: 4%; right: 2%;  --dur:5.5s; --delay:1.5s; }
 
-.about-stars { display: flex; gap: 4px; justify-content: center; }
-.about-stars svg { width: 16px; height: 16px; fill: var(--yellow); stroke: none; }
 
 /* ============================================
    CART SIDEBAR
@@ -1518,15 +1433,6 @@ ul { list-style: none; }
 .cart-item:hover { background: rgba(255,107,0,0.06); border-color: rgba(255,107,0,0.2); }
 @keyframes slideIn { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
 
-.cart-item-emoji-wrap {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: rgba(255,107,0,0.1);
-  border: 1px solid rgba(255,107,0,0.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px;
-  flex-shrink: 0;
-}
 .cart-item-info { flex: 1; min-width: 0; }
 .cart-item-name { font-weight: 600; font-size: 13px; color: white; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .cart-item-price { font-size: 13px; color: var(--orange); font-weight: 700; }
@@ -1738,7 +1644,6 @@ ul { list-style: none; }
   gap: 48px;
 }
 /* Left: text */
-.footer-cta-text {}
 .footer-cta-badge {
   display: inline-flex;
   align-items: center;
@@ -1954,7 +1859,12 @@ ul { list-style: none; }
 .footer-brand { display: flex; flex-direction: column; gap: 16px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; }
 .footer-logo img { width: 44px; height: 44px; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(255,107,0,0.3)); }
-.footer-logo-name { font-family: var(--font-display); font-size: 18px; color: white; }
+.footer-logo-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+.footer-logo-name .aki { color: white; }
+.footer-logo-name .pan { color: var(--orange); }
 .footer-brand-text { font-size: 13px; line-height: 1.8; color: rgba(255,255,255,0.4); max-width: 260px; }
 .footer-socials { display: flex; gap: 10px; }
 .footer-social {
@@ -2051,8 +1961,6 @@ ul { list-style: none; }
 .footer-bottom-right { display: flex; align-items: center; gap: 20px; }
 .footer-bottom-link { font-size: 12px; color: rgba(255,255,255,0.25); cursor: pointer; transition: color var(--transition); }
 .footer-bottom-link:hover { color: var(--orange); }
-.footer-bottom-brand { font-size: 12px; color: rgba(255,255,255,0.2); }
-.footer-bottom-brand a { color: var(--orange); cursor: pointer; font-weight: 600; }
 .footer-back-top {
   width: 36px; height: 36px;
   border-radius: 10px;
@@ -2106,7 +2014,6 @@ ul { list-style: none; }
 }
 
 /* ── LEFT: Benefits ── */
-.register-benefits {}
 .register-label {
   display: inline-flex;
   align-items: center;
@@ -2253,9 +2160,7 @@ ul { list-style: none; }
   box-shadow: 0 0 0 3px rgba(255,107,0,0.1);
 }
 .form-input:focus + .form-input-icon { stroke: var(--orange); }
-/* flip icon z-order so focus style works */
 .form-input-wrap .form-input { position: relative; z-index: 1; }
-.form-input-wrap .form-input:focus ~ .form-input-icon { stroke: var(--orange); }
 
 /* Password toggle */
 .form-input-wrap .form-pw-toggle {
@@ -2373,8 +2278,6 @@ ul { list-style: none; }
   .hero-ctas { justify-content: center; }
   .hero-divider { margin: 0 auto 24px; }
   .hero-visual { width: min(360px, 80vw); height: min(360px, 80vw); }
-  .hero-scroll { left: 50%; transform: translateX(-50%); }
-  .nav-order-btn { display: none; }
 }
 @media(max-width:768px) {
   #navbar { top:8px; left:12px; right:12px; padding:10px 16px; border-radius:16px; }
@@ -2384,9 +2287,7 @@ ul { list-style: none; }
   .hero-title-accent { font-size: clamp(44px, 11vw, 68px); }
   .hero-visual { width: 300px; height: 300px; }
   .about-inner { grid-template-columns:1fr; gap:40px; }
-  .about-card-stack { height:280px; }
   .footer-top { grid-template-columns:1fr; gap:32px; }
-  .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
 }
 @media(max-width:480px) {
   .products-grid { grid-template-columns:1fr; }
@@ -2403,9 +2304,7 @@ ul { list-style: none; }
 
 
 <!-- ============ PRELOADER ============ -->
-<div id="preloader" role="status" aria-label="Cargando AkiPAN">
-
-  <!-- Ambient orbs -->
+<div id="preloader" role="status" aria-label="Cargando AKIPAN">
 
   <!-- Cart scene -->
   <div class="pre-scene" aria-hidden="true">
@@ -2480,7 +2379,7 @@ ul { list-style: none; }
   <div class="pre-logo-wrap">
     <img class="pre-logo-img"
          src="LOGO AKIPAN TIENDA ONLINE.PNG"
-         alt="AkiPAN Tienda Online"
+         alt="AKIPAN Tienda Online"
          onerror="this.style.display='none'">
     <p class="pre-tagline">Tienda Online · Ecuador</p>
   </div>
@@ -2500,9 +2399,12 @@ ul { list-style: none; }
 
 <!-- ============ NAVBAR ============ -->
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
-  <a class="nav-logo" href="#hero" aria-label="Inicio AkiPAN">
-    <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN logo" onerror="this.style.display='none'">
-    <span class="nav-logo-text">AkiPAN</span>
+  <a class="nav-logo" href="#hero" aria-label="Inicio AKIPAN">
+    <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AKIPAN logo" onerror="this.style.display='none'">
+    <div class="nav-logo-text">
+      <span class="nav-logo-brand"><span class="aki">AKI</span><span class="pan">PAN</span></span>
+      <span class="nav-logo-sub">Tienda Online</span>
+    </div>
   </a>
   <ul class="nav-links" role="list">
     <li><a href="#hero">Inicio</a></li>
@@ -2608,7 +2510,7 @@ ul { list-style: none; }
 
     <!-- Center logo -->
     <div class="hero-logo-circle">
-      <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN">
+      <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AKIPAN">
     </div>
   </div>
 
@@ -2677,7 +2579,7 @@ ul { list-style: none; }
 </div>
 
 <!-- ============ ABOUT ============ -->
-<section id="about" aria-label="Sobre AkiPAN">
+<section id="about" aria-label="Sobre AKIPAN">
   <div class="about-bg-pattern" aria-hidden="true"></div>
   <div class="about-inner">
 
@@ -2686,7 +2588,7 @@ ul { list-style: none; }
       <span class="about-label">Nuestra historia</span>
       <h2 class="about-title">Desde el corazón<br>del <span>Ecuador</span></h2>
       <p class="about-text">
-        AkiPAN nació del sueño de llevar los sabores auténticos de la panadería ecuatoriana a cada hogar. Cada receta es un homenaje a nuestra tierra, nuestras familias y la tradición que nos une.
+        AKIPAN nació del sueño de llevar los sabores auténticos de la panadería ecuatoriana a cada hogar. Cada receta es un homenaje a nuestra tierra, nuestras familias y la tradición que nos une.
       </p>
       <p class="about-text">
         Ingredientes locales de alta calidad, sin conservantes artificiales — porque el mejor sabor viene de la naturaleza y del amor en cada preparación.
@@ -2754,7 +2656,7 @@ ul { list-style: none; }
       <div class="about-logo-wrap">
         <img class="about-logo-big"
              src="LOGO AKIPAN TIENDA ONLINE.PNG"
-             alt="AkiPAN logo"
+             alt="AKIPAN logo"
              onerror="this.style.display='none'">
       </div>
     </div>
@@ -2785,7 +2687,7 @@ ul { list-style: none; }
 
     <!-- LEFT: Benefits -->
     <div class="register-benefits reveal-left">
-      <span class="register-label">Únete a AkiPAN</span>
+      <span class="register-label">Únete a AKIPAN</span>
       <h2 class="register-title">Crea tu cuenta<br>y disfruta más <span>beneficios</span></h2>
       <p class="register-subtitle">Regístrate gratis y accede a descuentos exclusivos, historial de pedidos y ofertas especiales cada semana.</p>
 
@@ -2888,7 +2790,7 @@ ul { list-style: none; }
 
         <label class="form-check">
           <input type="checkbox" id="reg-terms" required>
-          <span class="form-check-label">Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de privacidad</a> de AkiPAN.</span>
+          <span class="form-check-label">Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de privacidad</a> de AKIPAN.</span>
         </label>
 
         <button type="submit" class="form-submit">
@@ -2956,7 +2858,7 @@ ul { list-style: none; }
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#25d366" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         </div>
         <div class="cta-panel-body">
-          <div class="cta-panel-title">Pedir por WhatsApp</div>
+          <div class="cta-panel-title">Asistencia por WhatsApp</div>
           <div class="cta-panel-status">
             <div class="cta-panel-status-dot" aria-hidden="true"></div>
             En línea · Lun–Sáb 7am–8pm
@@ -2980,8 +2882,8 @@ ul { list-style: none; }
       <!-- Brand -->
       <div class="footer-brand">
         <div class="footer-logo">
-          <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AkiPAN" onerror="this.style.display='none'">
-          <span class="footer-logo-name">AkiPAN</span>
+          <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AKIPAN" onerror="this.style.display='none'">
+          <span class="footer-logo-name"><span class="aki">AKI</span><span class="pan">PAN</span></span>
         </div>
         <p class="footer-brand-text">Sabores auténticos del Ecuador, elaborados con amor y tradición artesanal. Sin conservantes, sin compromisos.</p>
         <div class="footer-socials">
@@ -3062,7 +2964,7 @@ ul { list-style: none; }
         <div class="footer-flag-dot" style="background:#003893;color:#003893;"></div>
         <div class="footer-flag-dot" style="background:#CF142B;color:#CF142B;"></div>
       </div>
-      <span class="footer-bottom-copy">© 2026 AkiPAN Tienda Online · Hecho con amor en Ecuador</span>
+      <span class="footer-bottom-copy">© 2026 AKIPAN Tienda Online · Hecho con amor en Ecuador</span>
       <div class="footer-bottom-right">
         <a href="#" class="footer-bottom-link">Privacidad</a>
         <a href="#" class="footer-bottom-link">Términos</a>
@@ -3208,32 +3110,43 @@ function changeQty(productId, delta) {
 function renderCart() {
   const list = document.getElementById('cart-items-list');
   const foot = document.getElementById('cart-foot');
+  const hCount = document.getElementById('cart-head-count');
+  const totalItems = cart.reduce((s,i) => s + i.qty, 0);
+  if (hCount) hCount.textContent = totalItems;
   if (!cart.length) {
     list.innerHTML = `<div class="cart-empty">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
-      <span>Tu carrito está vacío</span>
+      <div class="cart-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
+      <p class="cart-empty-title">Tu carrito está vacío</p>
+      <p class="cart-empty-desc">Agrega productos artesanales y disfruta de los sabores del Ecuador.</p>
+      <a href="#products" class="cart-empty-cta" onclick="closeCart()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Ver productos
+      </a>
     </div>`;
     foot.style.display = 'none';
     return;
   }
   foot.style.display = 'block';
+  const total = getTotal();
   list.innerHTML = cart.map(item => {
     const p = PRODUCTS.find(p => p.id === item.id);
     if (!p) return '';
     return `<div class="cart-item" role="listitem">
-      <span class="cart-item-emoji" aria-hidden="true">${p.emoji}</span>
+      <div class="cart-item-emoji-wrap" aria-hidden="true">${p.emoji}</div>
       <div class="cart-item-info">
         <div class="cart-item-name">${p.name}</div>
         <div class="cart-item-price">$${(p.price * item.qty).toFixed(2)}</div>
       </div>
       <div class="cart-item-qty" role="group" aria-label="Cantidad de ${p.name}">
-        <button class="qty-btn" onclick="changeQty(${p.id},-1)" aria-label="Reducir cantidad">−</button>
+        <button class="qty-btn" onclick="changeQty(${p.id},-1)" aria-label="Reducir">−</button>
         <span class="qty-num" aria-live="polite">${item.qty}</span>
-        <button class="qty-btn" onclick="changeQty(${p.id},1)" aria-label="Aumentar cantidad">+</button>
+        <button class="qty-btn" onclick="changeQty(${p.id},1)" aria-label="Aumentar">+</button>
       </div>
     </div>`;
   }).join('');
-  document.getElementById('cart-total-price').textContent = `$${getTotal().toFixed(2)}`;
+  const sub = document.getElementById('cart-subtotal');
+  if (sub) sub.textContent = `$${total.toFixed(2)}`;
+  document.getElementById('cart-total-price').textContent = `$${total.toFixed(2)}`;
 }
 
 /* ============================================
@@ -3354,7 +3267,7 @@ function handleRegister(e) {
     btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> ¡Cuenta creada!`;
     btn.style.background = 'var(--green)';
     btn.style.opacity = '1';
-    showToast('🎉 ¡Bienvenido a AkiPAN, ' + nombre + '!');
+    showToast('🎉 ¡Bienvenido a AKIPAN, ' + nombre + '!');
     e.target.reset();
     setTimeout(() => {
       btn.innerHTML = originalHTML;
@@ -3392,22 +3305,13 @@ function handleCardTilt(e, card) {
   const rect = card.getBoundingClientRect();
   const cx = rect.left + rect.width / 2;
   const cy = rect.top + rect.height / 2;
-  const mx = e.clientX - cx;
-  const my = e.clientY - cy;
-  const rotX = -(my / rect.height) * 14;
-  const rotY =  (mx / rect.width)  * 14;
+  const rotX = -((e.clientY - cy) / rect.height) * 14;
+  const rotY =  ((e.clientX - cx) / rect.width)  * 14;
   card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.04,1.04,1.04)`;
-
-  // Update glow position
-  const glow = card.querySelector('.product-glow');
-  const px = ((e.clientX - rect.left) / rect.width)  * 100;
-  const py = ((e.clientY - rect.top)  / rect.height) * 100;
-  glow.style.setProperty('--mx', `${px}%`);
-  glow.style.setProperty('--my', `${py}%`);
 }
 function resetCardTilt(card) {
   card.style.transform = '';
-  }
+}
 
 
 /* ============================================
@@ -3521,7 +3425,7 @@ function runPreloader() {
   const pct    = document.getElementById('pre-percent');
 
   // Jiggle cart when each item lands
-  const jiggleTimes = [500, 750, 1000, 1250];
+  const jiggleTimes = [400, 700, 1100, 1500];
   jiggleTimes.forEach((t, i) => {
     setTimeout(() => {
       spawnSparks(0);
@@ -3533,11 +3437,7 @@ function runPreloader() {
 
   // Progress bar — synced to ~3.8s total
   const milestones = [
-    { target: 25,  delay: 0 },
-    { target: 55,  delay: 400 },
-    { target: 80,  delay: 800 },
-    { target: 95,  delay: 1200 },
-    { target: 100, delay: 1600 },
+    { target: 100, delay: 0 },
   ];
   milestones.forEach(({ target, delay }) => {
     setTimeout(() => {
@@ -3550,7 +3450,7 @@ function runPreloader() {
   setTimeout(() => {
     loader.classList.add('hidden');
     setTimeout(() => loader.remove(), 950);
-  }, 2000);
+  }, 2200);
 }
 
 /* ============================================
@@ -3565,10 +3465,7 @@ document.addEventListener('DOMContentLoaded', () => {
   runPreloader();
   observeReveal();
 
-  // Re-observe after products render
   setTimeout(observeReveal, 100);
-
-  // Hover on dynamically created elements
 });
 </script>
 </body>

@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" href="LOGO AKIPAN TIENDA ONLINE.PNG">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Non-blocking font load â€” no render delay on mobile -->
+<!-- Non-blocking font load — no render delay on mobile -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Karla:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"></noscript>
 <style>
@@ -52,7 +52,7 @@ ul { list-style: none; }
 
 
 /* ============================================
-   PRELOADER â€” CART ANIMATION
+   PRELOADER — CART ANIMATION
 ============================================ */
 #preloader {
   position: fixed;
@@ -69,7 +69,7 @@ ul { list-style: none; }
 }
 #preloader.hidden { opacity: 0; pointer-events: none; }
 
-/* â”€â”€ CART SCENE â”€â”€ */
+/* ── CART SCENE ── */
 .pre-scene {
   position: relative;
   width: 260px;
@@ -92,7 +92,7 @@ ul { list-style: none; }
   to   { opacity: 1; transform: translateY(0)   scale(1); }
 }
 
-/* Jiggle classes â€” added/removed by JS */
+/* Jiggle classes — added/removed by JS */
 .pre-cart-wrap.jiggle1 { animation: cartEntrance 0s, jiggle 0.45s ease !important; }
 .pre-cart-wrap.jiggle2 { animation: cartEntrance 0s, jiggle 0.45s ease !important; }
 .pre-cart-wrap.jiggle3 { animation: cartEntrance 0s, jiggle 0.45s ease !important; }
@@ -115,7 +115,7 @@ ul { list-style: none; }
   animation: orbitSpin 1.2s 0.8s linear infinite;
 }
 
-/* Items inside cart â€” pop in one by one */
+/* Items inside cart — pop in one by one */
 .pre-cart-item {
   opacity: 0;
   transform-origin: center bottom;
@@ -181,7 +181,7 @@ ul { list-style: none; }
   to   { opacity: 1;   transform: translateX(-50%) scaleX(1.15); }
 }
 
-/* â”€â”€ LOGO AREA â”€â”€ */
+/* ── LOGO AREA ── */
 .pre-logo-wrap {
   display: flex;
   flex-direction: column;
@@ -207,8 +207,8 @@ ul { list-style: none; }
   color: rgba(255,255,255,0.5);
 }
 
-/* â”€â”€ LABEL â”€â”€ */
-/* â”€â”€ PROGRESS â”€â”€ */
+/* ── LABEL ── */
+/* ── PROGRESS ── */
 .pre-progress-wrap {
   width: 200px;
   display: flex;
@@ -239,7 +239,7 @@ ul { list-style: none; }
   font-family: var(--font-body);
 }
 
-/* â”€â”€ PRELOADER RESPONSIVE â”€â”€ */
+/* ── PRELOADER RESPONSIVE ── */
 @media(max-width:768px) {
   #preloader { gap: 20px; }
   .pre-scene { transform: scale(0.82); transform-origin: center bottom; }
@@ -262,10 +262,10 @@ ul { list-style: none; }
   <div class="pre-scene" aria-hidden="true">
 
     <!-- Flying food items -->
-    <div class="pre-food" style="--sx:-220px;--sy:-160px;--sr:-30deg;--t:0.8s;--dur:0.5s;left:50%;top:50%;">ðŸ¥–</div>
-    <div class="pre-food" style="--sx: 210px;--sy:-140px;--sr: 25deg;--t:1.2s;--dur:0.5s;left:50%;top:50%;">ðŸŽ‚</div>
-    <div class="pre-food" style="--sx:-190px;--sy: 60px; --sr:-20deg;--t:1.6s;--dur:0.5s;left:50%;top:50%;">ðŸ¥</div>
-    <div class="pre-food" style="--sx: 200px;--sy: 50px; --sr: 30deg;--t:2.0s;--dur:0.5s;left:50%;top:50%;">ðŸª</div>
+    <div class="pre-food" style="--sx:-220px;--sy:-160px;--sr:-30deg;--t:0.8s;--dur:0.5s;left:50%;top:50%;">🥖</div>
+    <div class="pre-food" style="--sx: 210px;--sy:-140px;--sr: 25deg;--t:1.2s;--dur:0.5s;left:50%;top:50%;">🎂</div>
+    <div class="pre-food" style="--sx:-190px;--sy: 60px; --sr:-20deg;--t:1.6s;--dur:0.5s;left:50%;top:50%;">🥐</div>
+    <div class="pre-food" style="--sx: 200px;--sy: 50px; --sr: 30deg;--t:2.0s;--dur:0.5s;left:50%;top:50%;">🍪</div>
 
     <!-- Spark dots (4 sets timed to each item landing) -->
     <div class="pre-spark" id="sparks" style="bottom:28px;"></div>
@@ -287,15 +287,15 @@ ul { list-style: none; }
         <!-- Cart items (pop in one by one) -->
         <g class="pre-cart-item" style="--t:1.05s">
           <rect x="36" y="68" width="32" height="28" rx="6" fill="rgba(255,140,50,0.5)" stroke="rgba(255,140,50,0.8)" stroke-width="1.5"/>
-          <text x="52" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">ðŸ¥–</text>
+          <text x="52" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🥖</text>
         </g>
         <g class="pre-cart-item" style="--t:1.45s">
           <rect x="78" y="68" width="32" height="28" rx="6" fill="rgba(255,215,0,0.35)" stroke="rgba(255,215,0,0.7)" stroke-width="1.5"/>
-          <text x="94" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">ðŸŽ‚</text>
+          <text x="94" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🎂</text>
         </g>
         <g class="pre-cart-item" style="--t:1.85s">
           <rect x="120" y="68" width="32" height="28" rx="6" fill="rgba(192,57,43,0.35)" stroke="rgba(192,57,43,0.7)" stroke-width="1.5"/>
-          <text x="136" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">ðŸ¥</text>
+          <text x="136" y="87" font-size="16" text-anchor="middle" fill="white" font-family="sans-serif">🥐</text>
         </g>
         <g class="pre-cart-item" style="--t:2.25s">
           <!-- Extra item peek -->
@@ -305,7 +305,7 @@ ul { list-style: none; }
         <!-- Price tag -->
         <g class="pre-cart-item" style="--t:2.4s">
           <rect x="68" y="112" width="64" height="22" rx="11" fill="rgba(255,107,0,0.9)"/>
-          <text x="100" y="127" font-size="11" font-weight="bold" text-anchor="middle" fill="white" font-family="sans-serif" letter-spacing="0.5">Â¡Listo!</text>
+          <text x="100" y="127" font-size="11" font-weight="bold" text-anchor="middle" fill="white" font-family="sans-serif" letter-spacing="0.5">¡Listo!</text>
         </g>
         <!-- Left wheel -->
         <g class="pre-wheel" style="transform-box:fill-box;" transform="translate(46,130)">
@@ -333,7 +333,7 @@ ul { list-style: none; }
          src="LOGO AKIPAN TIENDA ONLINE.PNG"
          alt="AKIPAN Tienda Online"
          onerror="this.style.display='none'">
-    <p class="pre-tagline">Tienda Online Â· Ecuador</p>
+    <p class="pre-tagline">Tienda Online · Ecuador</p>
   </div>
 
   <!-- Progress -->
@@ -502,7 +502,7 @@ ul { list-style: none; }
   gap: 40px;
 }
 
-/* â”€â”€ HERO BACKGROUND â€” LEVEL GOD â”€â”€ */
+/* ── HERO BACKGROUND — LEVEL GOD ── */
 
 /* Base */
 .hero-bg-base {
@@ -524,7 +524,7 @@ ul { list-style: none; }
   pointer-events: none;
   will-change: transform;
 }
-/* Main warm light â€” right side */
+/* Main warm light — right side */
 .hero-blob { will-change: transform, opacity; }
 .hero-blob-1 {
   width: min(700px, 60vw);
@@ -539,7 +539,7 @@ ul { list-style: none; }
   100% { transform: translate(-40px,50px) scale(1.12); opacity: 1; }
 }
 
-/* Accent â€” bottom left */
+/* Accent — bottom left */
 .hero-blob-2 {
   width: min(500px, 45vw);
   height: min(500px, 45vw);
@@ -553,7 +553,7 @@ ul { list-style: none; }
   100% { transform: translate(50px,-40px) scale(1.08); }
 }
 
-/* Fill â€” top center */
+/* Fill — top center */
 .hero-blob-3 {
   width: min(400px, 35vw);
   height: min(300px, 28vw);
@@ -618,7 +618,7 @@ ul { list-style: none; }
   background-size: 200px;
 }
 
-/* Vignette â€” darken edges */
+/* Vignette — darken edges */
 .hero-vignette {
   position: absolute;
   inset: 0;
@@ -640,7 +640,7 @@ ul { list-style: none; }
   pointer-events: none;
 }
 
-/* â”€â”€ LEFT: TEXT CONTENT â”€â”€ */
+/* ── LEFT: TEXT CONTENT ── */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -806,7 +806,7 @@ ul { list-style: none; }
 }
 .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.35); transform: translateY(-3px); color: white; }
 
-/* â”€â”€ RIGHT: VISUAL â”€â”€ */
+/* ── RIGHT: VISUAL ── */
 .hero-visual {
   position: relative;
   z-index: 2;
@@ -1268,7 +1268,7 @@ ul { list-style: none; }
   align-items: center;
 }
 
-/* â”€â”€ LEFT â”€â”€ */
+/* ── LEFT ── */
 .about-content { color: white; }
 .about-label {
   display: inline-flex;
@@ -1352,7 +1352,7 @@ ul { list-style: none; }
 .about-cta:hover { background: var(--orange); border-color: var(--orange); color: white; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,107,0,0.35); }
 .about-cta svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
 
-/* â”€â”€ RIGHT â”€â”€ */
+/* ── RIGHT ── */
 .about-visual {
   position: relative;
   display: flex;
@@ -2123,7 +2123,7 @@ ul { list-style: none; }
   align-items: center;
 }
 
-/* â”€â”€ LEFT: Benefits â”€â”€ */
+/* ── LEFT: Benefits ── */
 .register-label {
   display: inline-flex;
   align-items: center;
@@ -2206,7 +2206,7 @@ ul { list-style: none; }
 .register-trust-text { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; }
 .register-trust-text strong { color: rgba(255,255,255,0.7); font-weight: 600; display: block; }
 
-/* â”€â”€ RIGHT: Form card â”€â”€ */
+/* ── RIGHT: Form card ── */
 .register-card {
   background: rgba(255,255,255,0.04);
   backdrop-filter: blur(24px);
@@ -2415,7 +2415,7 @@ ul { list-style: none; }
 <div id="particles-wrap" aria-hidden="true"></div>
 
 <!-- ============ NAVBAR ============ -->
-<nav id="navbar" role="navigation" aria-label="NavegaciÃ³n principal">
+<nav id="navbar" role="navigation" aria-label="Navegación principal">
   <a class="nav-logo" href="#hero" aria-label="Inicio AKIPAN">
     <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AKIPAN logo" onerror="this.style.display='none'">
     <div class="nav-logo-text">
@@ -2468,7 +2468,7 @@ ul { list-style: none; }
     <div class="hero-divider" aria-hidden="true"></div>
 
     <p class="hero-subtitle">
-      TradiciÃ³n, sabor y amor en cada bocado. Descubre nuestra selecciÃ³n artesanal hecha con los mejores ingredientes del campo ecuatoriano.
+      Tradición, sabor y amor en cada bocado. Descubre nuestra selección artesanal hecha con los mejores ingredientes del campo ecuatoriano.
     </p>
 
     <div class="hero-proof" aria-label="Valoraciones de clientes">
@@ -2480,7 +2480,7 @@ ul { list-style: none; }
       <div class="hero-proof-divider" aria-hidden="true"></div>
       <div class="hero-proof-text">
         <strong>+500 clientes felices</strong>
-        <span class="hero-proof-stars">â˜…â˜…â˜…â˜…â˜…</span>
+        <span class="hero-proof-stars">★★★★★</span>
       </div>
     </div>
 
@@ -2490,7 +2490,7 @@ ul { list-style: none; }
         Ver productos
       </a>
       <a href="#register" class="btn-secondary">
-        RegÃ­strate
+        Regístrate
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
       </a>
     </div>
@@ -2506,22 +2506,22 @@ ul { list-style: none; }
     <!-- Orbiting nodes -->
     <div class="hero-orbit-wrap" style="--dur:16s;--delay:0s;">
       <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:16s;--delay:0s;">
-        ðŸ¥–<span class="hero-orbit-label">Pan de Yuca</span>
+        🥖<span class="hero-orbit-label">Pan de Yuca</span>
       </div>
     </div>
     <div class="hero-orbit-wrap" style="--dur:20s;--delay:-5s;">
       <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:20s;--delay:-5s;">
-        ðŸŽ‚<span class="hero-orbit-label">Tres Leches</span>
+        🎂<span class="hero-orbit-label">Tres Leches</span>
       </div>
     </div>
     <div class="hero-orbit-wrap" style="--dur:18s;--delay:-9s;">
       <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:18s;--delay:-9s;">
-        ðŸ¥<span class="hero-orbit-label">Croissant</span>
+        🥐<span class="hero-orbit-label">Croissant</span>
       </div>
     </div>
     <div class="hero-orbit-wrap" style="--dur:22s;--delay:-14s;">
       <div class="hero-orbit-node" style="--r:min(200px,25vw);--dur:22s;--delay:-14s;">
-        ðŸª<span class="hero-orbit-label">Galletas</span>
+        🍪<span class="hero-orbit-label">Galletas</span>
       </div>
     </div>
 
@@ -2553,16 +2553,16 @@ ul { list-style: none; }
 <!-- ============ PRODUCTS ============ -->
 <section id="products" aria-label="Nuestros productos">
   <div class="section-header reveal">
-    <span class="section-label">MenÃº artesanal</span>
+    <span class="section-label">Menú artesanal</span>
     <h2 class="section-title">Nuestros Productos</h2>
     <p class="section-desc">Preparados a diario con ingredientes frescos y recetas familiares transmitidas por generaciones.</p>
   </div>
 
   <div class="products-filter reveal" role="group" aria-label="Filtrar productos">
     <button class="filter-btn active" data-filter="all">Todos</button>
-    <button class="filter-btn" data-filter="PanaderÃ­a">PanaderÃ­a</button>
+    <button class="filter-btn" data-filter="Panadería">Panadería</button>
     <button class="filter-btn" data-filter="Pasteles">Pasteles</button>
-    <button class="filter-btn" data-filter="BollerÃ­a">BollerÃ­a</button>
+    <button class="filter-btn" data-filter="Bollería">Bollería</button>
     <button class="filter-btn" data-filter="Dulces">Dulces</button>
     <button class="filter-btn" data-filter="Galletas">Galletas</button>
     <button class="filter-btn" data-filter="Frituras">Frituras</button>
@@ -2603,12 +2603,12 @@ ul { list-style: none; }
     <!-- LEFT -->
     <div class="about-content reveal-left">
       <span class="about-label">Nuestra historia</span>
-      <h2 class="about-title">Desde el corazÃ³n<br>del <span>Ecuador</span></h2>
+      <h2 class="about-title">Desde el corazón<br>del <span>Ecuador</span></h2>
       <p class="about-text">
-        AKIPAN naciÃ³ del sueÃ±o de llevar los sabores autÃ©nticos de la panaderÃ­a ecuatoriana a cada hogar. Cada receta es un homenaje a nuestra tierra, nuestras familias y la tradiciÃ³n que nos une.
+        AKIPAN nació del sueño de llevar los sabores auténticos de la panadería ecuatoriana a cada hogar. Cada receta es un homenaje a nuestra tierra, nuestras familias y la tradición que nos une.
       </p>
       <p class="about-text">
-        Ingredientes locales de alta calidad, sin conservantes artificiales â€” porque el mejor sabor viene de la naturaleza y del amor en cada preparaciÃ³n.
+        Ingredientes locales de alta calidad, sin conservantes artificiales — porque el mejor sabor viene de la naturaleza y del amor en cada preparación.
       </p>
 
       <div class="about-divider" aria-hidden="true"></div>
@@ -2620,11 +2620,11 @@ ul { list-style: none; }
         </div>
         <div class="about-stat-card">
           <div class="about-stat-num">10+</div>
-          <div class="about-stat-label">Productos Ãºnicos</div>
+          <div class="about-stat-label">Productos únicos</div>
         </div>
         <div class="about-stat-card">
-          <div class="about-stat-num">5â˜…</div>
-          <div class="about-stat-label">CalificaciÃ³n</div>
+          <div class="about-stat-num">5★</div>
+          <div class="about-stat-label">Calificación</div>
         </div>
       </div>
 
@@ -2641,31 +2641,31 @@ ul { list-style: none; }
 
       <!-- Feature badges -->
       <div class="about-feature about-feature-1">
-        <div class="about-feature-icon" style="--ic:rgba(39,174,96,0.25);">ðŸŒ¿</div>
+        <div class="about-feature-icon" style="--ic:rgba(39,174,96,0.25);">🌿</div>
         <div class="about-feature-text">
           <strong>100% Artesanal</strong>
           <span>Sin conservantes</span>
         </div>
       </div>
       <div class="about-feature about-feature-2">
-        <div class="about-feature-icon" style="--ic:rgba(255,215,0,0.2);">ðŸ‡ªðŸ‡¨</div>
+        <div class="about-feature-icon" style="--ic:rgba(255,215,0,0.2);">🇪🇨</div>
         <div class="about-feature-text">
           <strong>Hecho en Ecuador</strong>
           <span>Ingredientes locales</span>
         </div>
       </div>
       <div class="about-feature about-feature-3">
-        <div class="about-feature-icon" style="--ic:rgba(52,152,219,0.2);">ðŸšš</div>
+        <div class="about-feature-icon" style="--ic:rgba(52,152,219,0.2);">🚚</div>
         <div class="about-feature-text">
           <strong>Delivery</strong>
-          <span>EnvÃ­o a domicilio</span>
+          <span>Envío a domicilio</span>
         </div>
       </div>
       <div class="about-feature about-feature-4">
-        <div class="about-feature-icon" style="--ic:rgba(255,107,0,0.25);">â­</div>
+        <div class="about-feature-icon" style="--ic:rgba(255,107,0,0.25);">⭐</div>
         <div class="about-feature-text">
           <strong>5 Estrellas</strong>
-          <span>+500 reseÃ±as</span>
+          <span>+500 reseñas</span>
         </div>
       </div>
 
@@ -2704,34 +2704,34 @@ ul { list-style: none; }
 
     <!-- LEFT: Benefits -->
     <div class="register-benefits reveal-left">
-      <span class="register-label">Ãšnete a AKIPAN</span>
-      <h2 class="register-title">Crea tu cuenta<br>y disfruta mÃ¡s <span>beneficios</span></h2>
-      <p class="register-subtitle">RegÃ­strate gratis y accede a descuentos exclusivos, historial de pedidos y ofertas especiales cada semana.</p>
+      <span class="register-label">Únete a AKIPAN</span>
+      <h2 class="register-title">Crea tu cuenta<br>y disfruta más <span>beneficios</span></h2>
+      <p class="register-subtitle">Regístrate gratis y accede a descuentos exclusivos, historial de pedidos y ofertas especiales cada semana.</p>
 
       <div class="register-perk-list">
         <div class="register-perk">
-          <div class="register-perk-icon">ðŸŽ</div>
+          <div class="register-perk-icon">🎁</div>
           <div>
             <div class="register-perk-title">Descuentos exclusivos</div>
             <div class="register-perk-desc">Accede a promociones y precios especiales solo para miembros registrados.</div>
           </div>
         </div>
         <div class="register-perk">
-          <div class="register-perk-icon">ðŸ“¦</div>
+          <div class="register-perk-icon">📦</div>
           <div>
             <div class="register-perk-title">Historial de pedidos</div>
             <div class="register-perk-desc">Revisa y repite tus pedidos favoritos con un solo clic desde tu perfil.</div>
           </div>
         </div>
         <div class="register-perk">
-          <div class="register-perk-icon">ðŸ””</div>
+          <div class="register-perk-icon">🔔</div>
           <div>
             <div class="register-perk-title">Alertas de nuevos productos</div>
-            <div class="register-perk-desc">SÃ© el primero en conocer nuevas creaciones y ediciones limitadas.</div>
+            <div class="register-perk-desc">Sé el primero en conocer nuevas creaciones y ediciones limitadas.</div>
           </div>
         </div>
         <div class="register-perk">
-          <div class="register-perk-icon">ðŸšš</div>
+          <div class="register-perk-icon">🚚</div>
           <div>
             <div class="register-perk-title">Delivery prioritario</div>
             <div class="register-perk-desc">Los miembros registrados tienen prioridad en la cola de entrega.</div>
@@ -2740,10 +2740,10 @@ ul { list-style: none; }
       </div>
 
       <div class="register-trust">
-        <span class="register-trust-icon">ðŸ”’</span>
+        <span class="register-trust-icon">🔒</span>
         <div class="register-trust-text">
-          <strong>Tus datos estÃ¡n seguros</strong>
-          Nunca compartimos tu informaciÃ³n con terceros.
+          <strong>Tus datos están seguros</strong>
+          Nunca compartimos tu información con terceros.
         </div>
       </div>
     </div>
@@ -2751,7 +2751,7 @@ ul { list-style: none; }
     <!-- RIGHT: Form -->
     <div class="register-card reveal-right">
       <h3 class="register-card-title">Crear cuenta gratis</h3>
-      <p class="register-card-sub">Completa el formulario â€” toma menos de 1 minuto</p>
+      <p class="register-card-sub">Completa el formulario — toma menos de 1 minuto</p>
 
       <form class="register-form" onsubmit="handleRegister(event)" novalidate>
 
@@ -2759,21 +2759,21 @@ ul { list-style: none; }
           <div class="form-group">
             <label class="form-label" for="reg-nombre">Nombre</label>
             <div class="form-input-wrap">
-              <input class="form-input" type="text" id="reg-nombre" placeholder="MarÃ­a" autocomplete="given-name" required>
+              <input class="form-input" type="text" id="reg-nombre" placeholder="María" autocomplete="given-name" required>
               <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
           </div>
           <div class="form-group">
             <label class="form-label" for="reg-apellido">Apellido</label>
             <div class="form-input-wrap">
-              <input class="form-input" type="text" id="reg-apellido" placeholder="GonzÃ¡lez" autocomplete="family-name" required>
+              <input class="form-input" type="text" id="reg-apellido" placeholder="González" autocomplete="family-name" required>
               <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="reg-email">Correo electrÃ³nico</label>
+          <label class="form-label" for="reg-email">Correo electrónico</label>
           <div class="form-input-wrap">
             <input class="form-input" type="email" id="reg-email" placeholder="maria@email.com" autocomplete="email" required>
             <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -2781,7 +2781,7 @@ ul { list-style: none; }
         </div>
 
         <div class="form-group">
-          <label class="form-label" for="reg-tel">TelÃ©fono</label>
+          <label class="form-label" for="reg-tel">Teléfono</label>
           <div class="form-input-wrap">
             <input class="form-input" type="tel" id="reg-tel" placeholder="+593 99 000 0000" autocomplete="tel">
             <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
@@ -2790,16 +2790,16 @@ ul { list-style: none; }
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="reg-pass">ContraseÃ±a</label>
+            <label class="form-label" for="reg-pass">Contraseña</label>
             <div class="form-input-wrap">
-              <input class="form-input" type="password" id="reg-pass" placeholder="MÃ­nimo 8 caracteres" autocomplete="new-password" required>
+              <input class="form-input" type="password" id="reg-pass" placeholder="Mínimo 8 caracteres" autocomplete="new-password" required>
               <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
             </div>
           </div>
           <div class="form-group">
             <label class="form-label" for="reg-pass2">Confirmar</label>
             <div class="form-input-wrap">
-              <input class="form-input" type="password" id="reg-pass2" placeholder="Repite tu contraseÃ±a" autocomplete="new-password" required>
+              <input class="form-input" type="password" id="reg-pass2" placeholder="Repite tu contraseña" autocomplete="new-password" required>
               <svg class="form-input-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
             </div>
           </div>
@@ -2807,7 +2807,7 @@ ul { list-style: none; }
 
         <label class="form-check">
           <input type="checkbox" id="reg-terms" required>
-          <span class="form-check-label">Acepto los <a href="#">TÃ©rminos y condiciones</a> y la <a href="#">PolÃ­tica de privacidad</a> de AKIPAN.</span>
+          <span class="form-check-label">Acepto los <a href="#">Términos y condiciones</a> y la <a href="#">Política de privacidad</a> de AKIPAN.</span>
         </label>
 
         <button type="submit" class="form-submit">
@@ -2816,7 +2816,7 @@ ul { list-style: none; }
         </button>
 
         <div class="form-divider">o</div>
-        <p class="form-login-link">Â¿Ya tienes cuenta? <a href="#">Inicia sesiÃ³n aquÃ­</a></p>
+        <p class="form-login-link">¿Ya tienes cuenta? <a href="#">Inicia sesión aquí</a></p>
 
       </form>
     </div>
@@ -2832,24 +2832,24 @@ ul { list-style: none; }
     <div class="footer-cta-text">
       <div class="footer-cta-badge">
         <div class="footer-cta-badge-dot" aria-hidden="true"></div>
-        <span class="footer-cta-badge-text">Â¿Quieres algo?</span>
+        <span class="footer-cta-badge-text">¿Quieres algo?</span>
       </div>
-      <h2 class="footer-cta-title">Tu prÃ³ximo antojo<br><span>estÃ¡ aquÃ­</span></h2>
+      <h2 class="footer-cta-title">Tu próximo antojo<br><span>está aquí</span></h2>
       <p class="footer-cta-sub">Productos artesanales listos para entregarte. Frescos, sin conservantes, con sabor ecuatoriano de verdad.</p>
     </div>
 
     <!-- Center: chips -->
     <div class="footer-cta-chips" aria-hidden="true">
       <div class="footer-cta-chip">
-        <div class="footer-cta-chip-icon" style="background:rgba(255,107,0,0.15);">ðŸš€</div>
-        <span class="footer-cta-chip-label">Entrega rÃ¡pida</span>
+        <div class="footer-cta-chip-icon" style="background:rgba(255,107,0,0.15);">🚀</div>
+        <span class="footer-cta-chip-label">Entrega rápida</span>
       </div>
       <div class="footer-cta-chip">
-        <div class="footer-cta-chip-icon" style="background:rgba(39,174,96,0.15);">ðŸŒ¿</div>
+        <div class="footer-cta-chip-icon" style="background:rgba(39,174,96,0.15);">🌿</div>
         <span class="footer-cta-chip-label">100% Artesanal</span>
       </div>
       <div class="footer-cta-chip">
-        <div class="footer-cta-chip-icon" style="background:rgba(255,215,0,0.12);">ðŸ‡ªðŸ‡¨</div>
+        <div class="footer-cta-chip-icon" style="background:rgba(255,215,0,0.12);">🇪🇨</div>
         <span class="footer-cta-chip-label">Hecho en Ecuador</span>
       </div>
     </div>
@@ -2859,7 +2859,7 @@ ul { list-style: none; }
 
       <!-- Panel 1: Ver productos -->
       <a href="#products" class="cta-glass-panel cta-panel-orange" aria-label="Ver todos los productos">
-        <div class="cta-panel-icon">ðŸ¥–</div>
+        <div class="cta-panel-icon">🥖</div>
         <div class="cta-panel-body">
           <div class="cta-panel-title">Explorar productos</div>
           <div class="cta-panel-desc">10 creaciones artesanales disponibles hoy</div>
@@ -2878,7 +2878,7 @@ ul { list-style: none; }
           <div class="cta-panel-title">Asistencia por WhatsApp</div>
           <div class="cta-panel-status">
             <div class="cta-panel-status-dot" aria-hidden="true"></div>
-            En lÃ­nea Â· Lunâ€“SÃ¡b 7amâ€“8pm
+            En línea · Lun–Sáb 7am–8pm
           </div>
         </div>
         <div class="cta-panel-arrow" aria-hidden="true">
@@ -2902,7 +2902,7 @@ ul { list-style: none; }
           <img src="LOGO AKIPAN TIENDA ONLINE.PNG" alt="AKIPAN" onerror="this.style.display='none'">
           <span class="footer-logo-name"><span class="aki">AKI</span><span class="pan">PAN</span></span>
         </div>
-        <p class="footer-brand-text">Sabores autÃ©nticos del Ecuador, elaborados con amor y tradiciÃ³n artesanal. Sin conservantes, sin compromisos.</p>
+        <p class="footer-brand-text">Sabores auténticos del Ecuador, elaborados con amor y tradición artesanal. Sin conservantes, sin compromisos.</p>
         <div class="footer-socials">
           <a href="#" class="footer-social" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -2933,10 +2933,10 @@ ul { list-style: none; }
         <h4>Empresa</h4>
         <ul>
           <li><a href="#about">Nosotros</a></li>
-          <li><a href="#products">MenÃº completo</a></li>
+          <li><a href="#products">Menú completo</a></li>
           <li><a href="#">Delivery</a></li>
           <li><a href="#">Contacto</a></li>
-          <li><a href="#">PolÃ­tica de privacidad</a></li>
+          <li><a href="#">Política de privacidad</a></li>
         </ul>
       </div>
 
@@ -2948,7 +2948,7 @@ ul { list-style: none; }
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
           </div>
           <div>
-            <div class="footer-contact-label">TelÃ©fono</div>
+            <div class="footer-contact-label">Teléfono</div>
             <div class="footer-contact-value">+593 99 000 0000</div>
           </div>
         </div>
@@ -2967,7 +2967,7 @@ ul { list-style: none; }
           </div>
           <div>
             <div class="footer-contact-label">Horario</div>
-            <div class="footer-contact-value">Lun â€“ SÃ¡b Â· 7am â€“ 8pm</div>
+            <div class="footer-contact-value">Lun – Sáb · 7am – 8pm</div>
           </div>
         </div>
       </div>
@@ -2981,10 +2981,10 @@ ul { list-style: none; }
         <div class="footer-flag-dot" style="background:#003893;color:#003893;"></div>
         <div class="footer-flag-dot" style="background:#CF142B;color:#CF142B;"></div>
       </div>
-      <span class="footer-bottom-copy">Â© 2026 AKIPAN Tienda Online Â· Hecho con amor en Ecuador</span>
+      <span class="footer-bottom-copy">© 2026 AKIPAN Tienda Online · Hecho con amor en Ecuador</span>
       <div class="footer-bottom-right">
         <a href="#" class="footer-bottom-link">Privacidad</a>
-        <a href="#" class="footer-bottom-link">TÃ©rminos</a>
+        <a href="#" class="footer-bottom-link">Términos</a>
         <button class="footer-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Volver arriba">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
         </button>
@@ -3018,7 +3018,7 @@ ul { list-style: none; }
       <div class="cart-empty-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
       </div>
-      <p class="cart-empty-title">Tu carrito estÃ¡ vacÃ­o</p>
+      <p class="cart-empty-title">Tu carrito está vacío</p>
       <p class="cart-empty-desc">Agrega productos artesanales y disfruta de los sabores del Ecuador.</p>
       <a href="#products" class="cart-empty-cta" onclick="closeCart()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
@@ -3049,7 +3049,7 @@ ul { list-style: none; }
     </button>
     <div class="cart-secure" aria-hidden="true">
       <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      Pago 100% seguro Â· Datos protegidos
+      Pago 100% seguro · Datos protegidos
     </div>
   </div>
 
@@ -3063,16 +3063,16 @@ ul { list-style: none; }
    PRODUCT DATA
 ============================================ */
 const PRODUCTS = [
-  { id:1,  name:'Pan de Yuca',           price:2.50, emoji:'ðŸ¥–', cat:'PanaderÃ­a',  badge:'Popular', badgeType:'popular', desc:'Suave y esponjoso, hecho con almidÃ³n de yuca y queso fresco ecuatoriano.' },
-  { id:2,  name:'Empanadas de Viento',   price:1.50, emoji:'ðŸ¥Ÿ', cat:'Frituras',   badge:'ClÃ¡sico', badgeType:'',        desc:'Crujientes y doradas, rellenas con queso y cebolla, fritas al momento.' },
-  { id:3,  name:'Rosca de Reyes',        price:8.00, emoji:'ðŸ©', cat:'Especiales', badge:'Especial', badgeType:'popular', desc:'Trenzada a mano con frutas confitadas y azÃºcar perlada. Perfecta para compartir.' },
-  { id:4,  name:'Pan Integral',          price:3.00, emoji:'ðŸž', cat:'PanaderÃ­a',  badge:'Saludable', badgeType:'new',   desc:'Horneado con granos enteros de trigo integral, rico en fibra y nutrientes.' },
-  { id:5,  name:'Croissant de Mantequilla', price:2.00, emoji:'ðŸ¥', cat:'BollerÃ­a', badge:'Hojaldrado', badgeType:'',   desc:'Capas finas y mantecosas, horneados frescos cada maÃ±ana.' },
-  { id:6,  name:'Cake de Chocolate',     price:15.00, emoji:'ðŸŽ‚', cat:'Pasteles',  badge:'Premium', badgeType:'popular', desc:'Bizcochuelo hÃºmedo con cobertura de ganache de chocolate oscuro ecuatoriano.' },
-  { id:7,  name:'Suspiros Ecuatorianos', price:4.00, emoji:'ðŸ¬', cat:'Dulces',    badge:'Tradicional', badgeType:'',    desc:'Merengues ligeros y crujientes, endulzados con miel de caÃ±a panela.' },
-  { id:8,  name:'Pan de AnÃ­s',           price:2.50, emoji:'ðŸ«“', cat:'PanaderÃ­a', badge:'Favorito', badgeType:'',       desc:'AromÃ¡tico y tierno, perfumado con semillas de anÃ­s molido de Latacunga.' },
-  { id:9,  name:'Galletas de Avena',     price:3.50, emoji:'ðŸª', cat:'Galletas',  badge:'Nuevo', badgeType:'new',       desc:'Crujientes con avena, chispas de chocolate y canela ecuatoriana.' },
-  { id:10, name:'Torta de Tres Leches',  price:18.00, emoji:'ðŸ°', cat:'Pasteles', badge:'Estrella', badgeType:'popular', desc:'Esponjoso bizcocho baÃ±ado en tres leches, coronado con crema chantilly.' },
+  { id:1,  name:'Pan de Yuca',           price:2.50, emoji:'🥖', cat:'Panadería',  badge:'Popular', badgeType:'popular', desc:'Suave y esponjoso, hecho con almidón de yuca y queso fresco ecuatoriano.' },
+  { id:2,  name:'Empanadas de Viento',   price:1.50, emoji:'🥟', cat:'Frituras',   badge:'Clásico', badgeType:'',        desc:'Crujientes y doradas, rellenas con queso y cebolla, fritas al momento.' },
+  { id:3,  name:'Rosca de Reyes',        price:8.00, emoji:'🍩', cat:'Especiales', badge:'Especial', badgeType:'popular', desc:'Trenzada a mano con frutas confitadas y azúcar perlada. Perfecta para compartir.' },
+  { id:4,  name:'Pan Integral',          price:3.00, emoji:'🍞', cat:'Panadería',  badge:'Saludable', badgeType:'new',   desc:'Horneado con granos enteros de trigo integral, rico en fibra y nutrientes.' },
+  { id:5,  name:'Croissant de Mantequilla', price:2.00, emoji:'🥐', cat:'Bollería', badge:'Hojaldrado', badgeType:'',   desc:'Capas finas y mantecosas, horneados frescos cada mañana.' },
+  { id:6,  name:'Cake de Chocolate',     price:15.00, emoji:'🎂', cat:'Pasteles',  badge:'Premium', badgeType:'popular', desc:'Bizcochuelo húmedo con cobertura de ganache de chocolate oscuro ecuatoriano.' },
+  { id:7,  name:'Suspiros Ecuatorianos', price:4.00, emoji:'🍬', cat:'Dulces',    badge:'Tradicional', badgeType:'',    desc:'Merengues ligeros y crujientes, endulzados con miel de caña panela.' },
+  { id:8,  name:'Pan de Anís',           price:2.50, emoji:'🫓', cat:'Panadería', badge:'Favorito', badgeType:'',       desc:'Aromático y tierno, perfumado con semillas de anís molido de Latacunga.' },
+  { id:9,  name:'Galletas de Avena',     price:3.50, emoji:'🍪', cat:'Galletas',  badge:'Nuevo', badgeType:'new',       desc:'Crujientes con avena, chispas de chocolate y canela ecuatoriana.' },
+  { id:10, name:'Torta de Tres Leches',  price:18.00, emoji:'🍰', cat:'Pasteles', badge:'Estrella', badgeType:'popular', desc:'Esponjoso bizcocho bañado en tres leches, coronado con crema chantilly.' },
 ];
 
 /* ============================================
@@ -3111,7 +3111,7 @@ function addToCart(productId) {
   updateCartCount();
   renderCart();
   const p = PRODUCTS.find(p => p.id === productId);
-  showToast(`${p.emoji} ${p.name} aÃ±adido al carrito`);
+  showToast(`${p.emoji} ${p.name} añadido al carrito`);
 }
 
 function changeQty(productId, delta) {
@@ -3133,7 +3133,7 @@ function renderCart() {
   if (!cart.length) {
     list.innerHTML = `<div class="cart-empty">
       <div class="cart-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
-      <p class="cart-empty-title">Tu carrito estÃ¡ vacÃ­o</p>
+      <p class="cart-empty-title">Tu carrito está vacío</p>
       <p class="cart-empty-desc">Agrega productos artesanales y disfruta de los sabores del Ecuador.</p>
       <a href="#products" class="cart-empty-cta" onclick="closeCart()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
@@ -3155,7 +3155,7 @@ function renderCart() {
         <div class="cart-item-price">$${(p.price * item.qty).toFixed(2)}</div>
       </div>
       <div class="cart-item-qty" role="group" aria-label="Cantidad de ${p.name}">
-        <button class="qty-btn" onclick="changeQty(${p.id},-1)" aria-label="Reducir">âˆ’</button>
+        <button class="qty-btn" onclick="changeQty(${p.id},-1)" aria-label="Reducir">−</button>
         <span class="qty-num" aria-live="polite">${item.qty}</span>
         <button class="qty-btn" onclick="changeQty(${p.id},1)" aria-label="Aumentar">+</button>
       </div>
@@ -3207,10 +3207,10 @@ function showToast(msg) {
    RENDER PRODUCTS
 ============================================ */
 const CAT_COLORS = {
-  'PanaderÃ­a':  'radial-gradient(circle at 40% 55%, rgba(255,107,0,0.22) 0%, rgba(0,0,0,0.35) 70%)',
+  'Panadería':  'radial-gradient(circle at 40% 55%, rgba(255,107,0,0.22) 0%, rgba(0,0,0,0.35) 70%)',
   'Frituras':   'radial-gradient(circle at 40% 55%, rgba(255,215,0,0.20) 0%, rgba(0,0,0,0.35) 70%)',
   'Especiales': 'radial-gradient(circle at 40% 55%, rgba(192,57,43,0.22) 0%, rgba(0,0,0,0.35) 70%)',
-  'BollerÃ­a':   'radial-gradient(circle at 40% 55%, rgba(255,140,50,0.20) 0%, rgba(0,0,0,0.35) 70%)',
+  'Bollería':   'radial-gradient(circle at 40% 55%, rgba(255,140,50,0.20) 0%, rgba(0,0,0,0.35) 70%)',
   'Pasteles':   'radial-gradient(circle at 40% 55%, rgba(155,89,182,0.22) 0%, rgba(0,0,0,0.35) 70%)',
   'Dulces':     'radial-gradient(circle at 40% 55%, rgba(39,174,96,0.20)  0%, rgba(0,0,0,0.35) 70%)',
   'Galletas':   'radial-gradient(circle at 40% 55%, rgba(52,152,219,0.20) 0%, rgba(0,0,0,0.35) 70%)',
@@ -3227,7 +3227,7 @@ function renderProducts(filter = 'all') {
              aria-label="${p.name} - $${p.price.toFixed(2)}">
       <div class="product-shine" aria-hidden="true"></div>
       <div class="product-card-inner">
-        <div class="product-img-wrap" style="--card-bg:${CAT_COLORS[p.cat]||CAT_COLORS['PanaderÃ­a']}">
+        <div class="product-img-wrap" style="--card-bg:${CAT_COLORS[p.cat]||CAT_COLORS['Panadería']}">
           <span class="product-emoji" aria-hidden="true">${p.emoji}</span>
           <span class="product-badge ${p.badgeType}">${p.badge}</span>
         </div>
@@ -3243,7 +3243,7 @@ function renderProducts(filter = 'all') {
             </div>
             <button class="add-to-cart"
                     onclick="handleAddToCart(event, ${p.id}, this)"
-                    aria-label="AÃ±adir ${p.name} al carrito">
+                    aria-label="Añadir ${p.name} al carrito">
               <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
               Agregar
             </button>
@@ -3269,10 +3269,10 @@ function handleRegister(e) {
   const btn      = e.target.querySelector('.form-submit');
 
   if (!nombre || !apellido || !email || !pass) { showToast('Por favor completa todos los campos requeridos.'); return; }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Ingresa un correo electrÃ³nico vÃ¡lido.'); return; }
-  if (pass.length < 8) { showToast('La contraseÃ±a debe tener al menos 8 caracteres.'); return; }
-  if (pass !== pass2)  { showToast('Las contraseÃ±as no coinciden.'); return; }
-  if (!terms) { showToast('Debes aceptar los tÃ©rminos y condiciones.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast('Ingresa un correo electrónico válido.'); return; }
+  if (pass.length < 8) { showToast('La contraseña debe tener al menos 8 caracteres.'); return; }
+  if (pass !== pass2)  { showToast('Las contraseñas no coinciden.'); return; }
+  if (!terms) { showToast('Debes aceptar los términos y condiciones.'); return; }
 
   // Loading state
   const originalHTML = btn.innerHTML;
@@ -3281,10 +3281,10 @@ function handleRegister(e) {
   btn.disabled = true;
 
   setTimeout(() => {
-    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Â¡Cuenta creada!`;
+    btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> ¡Cuenta creada!`;
     btn.style.background = 'var(--green)';
     btn.style.opacity = '1';
-    showToast('ðŸŽ‰ Â¡Bienvenido a AKIPAN, ' + nombre + '!');
+    showToast('🎉 ¡Bienvenido a AKIPAN, ' + nombre + '!');
     e.target.reset();
     setTimeout(() => {
       btn.innerHTML = originalHTML;
@@ -3487,7 +3487,7 @@ function runPreloader() {
 /* ============================================
    INIT
 ============================================ */
-// Preloader starts immediately â€” no waiting for fonts/assets
+// Preloader starts immediately — no waiting for fonts/assets
 // On mobile/tablet use shorter duration
 if (window.innerWidth < 1024) {
   document.documentElement.style.setProperty('--pre-duration', '2000');
